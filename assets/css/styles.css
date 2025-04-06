@@ -1,0 +1,429 @@
+/* Global styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+    background-color: #4a9af8;
+}
+
+/* Navbar styles */
+.navbar {
+    padding: 1rem 0;
+    background-color: white !important;
+    position: relative;
+    z-index: 50;
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+/* Hero section */
+.hero {
+    color: white;
+    padding: 50px 0;
+    min-height: calc(100vh - 260px);
+    position: relative;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.hero h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.play-btn {
+    background-color: #8cc73f !important;
+    color: white !important;
+    border: none;
+    padding: 10px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.play-btn:hover {
+    transform: scale(1.05);
+    background-color: #74a730 !important;
+}
+
+/* Game scene */
+.game-scene {
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+
+.game-clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+/* Game elements */
+.game-elements {
+    position: absolute;
+    bottom: 80px;
+    width: 100%;
+    height: 200px;
+    z-index: 10;
+}
+
+.cloud1, .cloud2, .cloud3 {
+    position: absolute;
+    width: 100px;
+    animation: floatCloud linear infinite;
+}
+
+.cloud1 {
+    top: 50px;
+    left: 10%;
+    animation-duration: 60s;
+}
+
+.cloud2 {
+    top: 30px;
+    left: 40%;
+    animation-duration: 75s;
+}
+
+.cloud3 {
+    top: 80px;
+    left: 70%;
+    animation-duration: 90s;
+}
+
+.mario {
+    position: absolute;
+    width: 50px;
+    bottom: 0;
+    left: 150px;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.coin {
+    position: absolute;
+    width: 30px;
+    top: 150px;
+    right: 40%;
+    animation: spin 2s linear infinite;
+}
+
+.mushroom {
+    position: absolute;
+    width: 40px;
+    bottom: 0;
+    right: 250px;
+}
+
+.pipe {
+    position: absolute;
+    width: 80px;
+    bottom: 0;
+    right: 150px;
+}
+
+.wall {
+    position: absolute;
+    width: 120px;
+    bottom: 0;
+}
+
+.wall-left {
+    right: 350px;
+}
+
+.wall-right {
+    right: 20px;
+}
+
+/* Footer */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 5;
+}
+
+.ground-footer {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+}
+
+/* Games page */
+.game-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    margin-top: 50px;
+    padding-bottom: 100px;
+}
+
+.game-card {
+    background: url('../images/game/bgcard.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+    margin-bottom: 20px;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+}
+
+.game-card-image {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+}
+
+.game-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.game-card-body {
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.game-card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.game-card-text {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    color: #555;
+    height: 60px;
+    overflow: hidden;
+}
+
+.play-button {
+    background-color: #ffcf00;
+    color: #000;
+    border: none;
+    padding: 10px 0;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    text-transform: uppercase;
+}
+
+.play-button:hover {
+    background-color: #e6b800;
+    color: #000;
+    text-decoration: none;
+}
+
+/* Animations */
+@keyframes floatCloud {
+    from {
+        transform: translateX(-100px);
+    }
+    to {
+        transform: translateX(calc(100vw + 100px));
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+/* Jump animation */
+@keyframes jump {
+    0%, 100% {
+        bottom: 0;
+    }
+    50% {
+        bottom: 100px;
+    }
+}
+
+.jump {
+    animation: jump 0.5s ease;
+}
+
+/* Footer transition animation */
+@keyframes footerSlideUp {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+/* Additional styles for games page */
+.games-container {
+    position: relative;
+    z-index: 10;
+}
+
+.games-content {
+    min-height: calc(100vh - 260px);
+    position: relative;
+    padding-bottom: 80px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .hero {
+        text-align: center;
+    }
+    
+    .game-cards-container {
+        justify-content: space-around;
+    }
+    
+    .game-card {
+        width: 45%;
+        min-width: 200px;
+    }
+    
+    .wall-left {
+        right: 250px;
+    }
+    
+    .wall-right {
+        right: 10px;
+    }
+    
+    .mushroom {
+        right: 180px;
+    }
+    
+    .pipe {
+        right: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 30px 0;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+    
+    .game-scene {
+        height: 300px;
+    }
+    
+    .game-cards-container {
+        gap: 15px;
+    }
+    
+    .game-card {
+        width: 90%;
+        max-width: 300px;
+    }
+    
+    .cloud1, .cloud2, .cloud3 {
+        width: 80px;
+    }
+    
+    .mario {
+        width: 40px;
+    }
+    
+    .wall {
+        width: 100px;
+    }
+    
+    .wall-left {
+        right: 200px;
+    }
+    
+    .pipe {
+        width: 60px;
+        right: 80px;
+    }
+    
+    .mushroom {
+        width: 30px;
+        right: 150px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero h2 {
+        font-size: 1.3rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .play-btn {
+        font-size: 1.1rem;
+    }
+    
+    .game-scene {
+        height: 250px;
+    }
+    
+    .wall-left {
+        right: 140px;
+        width: 80px;
+    }
+    
+    .wall-right {
+        width: 80px;
+        right: 10px;
+    }
+    
+    .pipe {
+        right: 60px;
+        width: 50px;
+    }
+    
+    .mushroom {
+        right: 105px;
+    }
+    
+    .cloud1, .cloud2, .cloud3 {
+        width: 60px;
+    }
+}

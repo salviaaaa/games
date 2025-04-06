@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games - Retro Games</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .game-card {
+            background: url('assets/images/bgcard.png');
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.3s;
+        }
+        
+        .play-button {
+            background-color: #ffcf00;
+            width: 100%;
+            display: block;
+            text-align: center;
+            padding: 10px 0;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+            border-radius: 0;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="assets/images/logo.png" alt="Retro Logo" class="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="games.html">Games</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Games Content Area -->
+    <div class="games-content">
+        <!-- Clouds -->
+        <div class="game-scene game-clouds">
+            <img src="assets/images/cloud.png" class="cloud1" alt="Cloud">
+            <img src="assets/images/cloud.png" class="cloud2" alt="Cloud">
+            <img src="assets/images/cloud.png" class="cloud3" alt="Cloud">
+        </div>
+        
+        <!-- Games Grid -->
+        <div class="container py-4 games-container">
+            <div class="game-cards-container">
+                <!-- Game Card 1: Tic-Tac-Toe -->
+                <div class="game-card">
+                    <div class="game-card-image">
+                        <img src="assets/images/game/tictactoe.png" alt="Tic-Tac-Toe">
+                    </div>
+                    <div class="game-card-body">
+                        <h5 class="game-card-title">Tic-Tac-Toe</h5>
+                        <p class="game-card-text">Permainan klasik permainan pertarungan logika yang cepat untuk menang!</p>
+                    </div>
+                    <a href="#" class="play-button">PLAY</a>
+                </div>
+                <!-- Game Card 2: Tetris -->
+                <div class="game-card">
+                    <div class="game-card-image">
+                        <img src="assets/images/game/tetris.png" alt="Tetris">
+                    </div>
+                    <div class="game-card-body">
+                        <h5 class="game-card-title">Tetris</h5>
+                        <p class="game-card-text">Game klasik dengan strategi dan kecepatan untuk menyusun balok yang turun!</p>
+                    </div>
+                    <a href="#" class="play-button">PLAY</a>
+                </div>
+                <!-- Game Card 3: Checkers -->
+                <div class="game-card">
+                    <div class="game-card-image">
+                        <img src="assets/images/game/checkers.png" alt="Checkers">
+                    </div>
+                    <div class="game-card-body">
+                        <h5 class="game-card-title">Checkers</h5>
+                        <p class="game-card-text">Dapatkan strategi terbaikmu untuk mengalahkan lawan dengan melangkahi bidak!</p>
+                    </div>
+                    <a href="#" class="play-button">PLAY</a>
+                </div>
+                <!-- Game Card 4: Flappy Bird -->
+                <div class="game-card">
+                    <div class="game-card-image">
+                        <img src="assets/images/game/flappybird.png" alt="Flappy Bird">
+                    </div>
+                    <div class="game-card-body">
+                        <h5 class="game-card-title">Flappy Bird</h5>
+                        <p class="game-card-text">Tantang refleks dan ketahananmu dengan menerbangkan burung melalui rintangan!</p>
+                    </div>
+                    <a href="#" class="play-button">PLAY</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Elements -->
+    <div class="game-elements">
+        <img src="assets/images/mario.png" class="mario" id="mario" alt="Mario">
+        <img src="assets/images/wall.png" class="wall wall-left" alt="Wall">
+        <img src="assets/images/wall.png" class="wall wall-right" alt="Wall">
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <img src="assets/images/ground.png" class="ground-footer" alt="Ground">
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
+</body>
+</html>
