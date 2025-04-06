@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Loading Screen
+    const loadingScreen = document.querySelector('.loading-screen');
+    
+    // Tampilkan content setelah 5 millisecond
+    setTimeout(() => {
+        if (loadingScreen) {
+            loadingScreen.classList.add('loading-hidden');
+            
+            // Hapus loading screen setelah transisi selesai
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }
+    }, 500); // 500ms = 0.5 detik (loading terlalu cepat jika hanya 5ms)
+    
     const mario = document.getElementById('mario');
     const playButton = document.getElementById('playButton');
     let isJumping = false;
