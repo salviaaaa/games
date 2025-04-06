@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="tetris.css">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body class="bg-dark">
+    <!-- Tombol Kembali -->
+    <a href="../../games.html" class="btn btn-secondary back-button">Kembali ke Daftar Game</a>
+    
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h1 class="text-light mb-4">Tetris</h1>
+                <div class="game-container">
+                    <canvas id="gameCanvas" width="300" height="600"></canvas>
+                    <div class="game-info">
+                        <div class="score text-light">Score: <span id="score">0</span></div>
+                        <div class="level text-light">Level: <span id="level">1</span></div>
+                        <div class="next-piece">
+                            <h5 class="text-light">Next Piece:</h5>
+                            <canvas id="nextPieceCanvas" width="100" height="100"></canvas>
+                        </div>
+                        <button id="startButton" class="btn btn-success mt-3">Mulai Game</button>
+                        <button id="pauseButton" class="btn btn-warning mt-2 d-none">Pause</button>
+                    </div>
+                    <div id="gameOver" class="game-over d-none">
+                        <h2 class="text-danger">Game Over!</h2>
+                        <button id="restartButton" class="btn btn-primary mt-2">Main Lagi</button>
+                    </div>
+                </div>
+                <div class="controls-info text-light mt-4">
+                    <h4>Kontrol:</h4>
+                    <p>← → : Gerak Kiri/Kanan</p>
+                    <p>↑ : Putar</p>
+                    <p>↓ : Turun Cepat</p>
+                    <p>Spasi : Drop Langsung</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="tetris.js"></script>
+</body>
+</html>
