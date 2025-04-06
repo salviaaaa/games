@@ -46,113 +46,121 @@
         <img src="assets/images/mario.gif" alt="Loading..." class="loading-mario">
     </div>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="assets/images/logo.png" alt="Retro Logo" class="logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="games.html">Games</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Games Content Area -->
-    <div class="games-content">
+    <!-- Game Background -->
+    <div class="game-background">
         <!-- Clouds -->
-        <div class="game-scene game-clouds">
-            <img src="assets/images/cloud.png" class="cloud1" alt="Cloud">
-            <img src="assets/images/cloud.png" class="cloud2" alt="Cloud">
-            <img src="assets/images/cloud.png" class="cloud3" alt="Cloud">
+        <div class="game-scene">
+            <img src="assets/images/cloud.png" class="cloud1 scroll-element" alt="Cloud">
+            <img src="assets/images/cloud.png" class="cloud2 scroll-element" alt="Cloud">
+            <img src="assets/images/cloud.png" class="cloud3 scroll-element" alt="Cloud">
         </div>
         
-        <!-- Games Grid -->
-        <div class="container py-4 games-container">
-            <div class="game-cards-container">
-                <!-- Game Card 1: Tic-Tac-Toe -->
-                <a href="games/tic-tac-toe/tic-tac-toe.html" class="card-link">
-                    <div class="game-card">
-                        <div class="game-card-image">
-                            <img src="assets/images/game/tictactoe.png" alt="Tic-Tac-Toe">
-                        </div>
-                        <div class="game-card-body">
-                            <h5 class="game-card-title">Tic-Tac-Toe</h5>
-                            <p class="game-card-text">Permainan klasik permainan pertarungan logika yang cepat untuk menang!</p>
-                        </div>
-                        <div class="play-button">MAIN</div>
-                    </div>
+        <!-- Game Elements -->
+        <div class="game-elements">
+            <img src="assets/images/mario.png" class="mario" id="mario" alt="Mario">
+            <img src="assets/images/mushroom.png" class="mushroom scroll-element" alt="Mushroom">
+            <img src="assets/images/wall.png" class="wall wall-left scroll-element" alt="Wall">
+            <img src="assets/images/wall.png" class="wall wall-right scroll-element" alt="Wall">
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <img src="assets/images/ground.png" class="ground-footer" alt="Ground">
+        </footer>
+    </div>
+
+    <!-- Content -->
+    <div class="content-wrapper">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="assets/images/logo.png" alt="Retro Logo" class="logo">
                 </a>
-                <!-- Game Card 2: Tetris -->
-                <a href="games/tetris/tetris.html" class="card-link">
-                    <div class="game-card">
-                        <div class="game-card-image">
-                            <img src="assets/images/game/tetris.png" alt="Tetris">
-                        </div>
-                        <div class="game-card-body">
-                            <h5 class="game-card-title">Tetris</h5>
-                            <p class="game-card-text">Game klasik dengan strategi dan kecepatan untuk menyusun balok yang turun!</p>
-                        </div>
-                        <div class="play-button">MAIN</div>
-                    </div>
-                </a>
-                <!-- Game Card 3: Checkers -->
-                <a href="games/checkers/checkers.html" class="card-link">
-                    <div class="game-card">
-                        <div class="game-card-image">
-                            <img src="assets/images/game/checkers.png" alt="Checkers">
-                        </div>
-                        <div class="game-card-body">
-                            <h5 class="game-card-title">Checkers</h5>
-                            <p class="game-card-text">Dapatkan strategi terbaikmu untuk mengalahkan lawan dengan melangkahi bidak!</p>
-                        </div>
-                        <div class="play-button">MAIN</div>
-                    </div>
-                </a>
-                <!-- Game Card 4: Flappy Bird -->
-                <a href="games/flappy-bird/flappybird.html" class="card-link">
-                    <div class="game-card">
-                        <div class="game-card-image">
-                            <img src="assets/images/game/flappybird.png" alt="Flappy Bird">
-                        </div>
-                        <div class="game-card-body">
-                            <h5 class="game-card-title">Flappy Bird</h5>
-                            <p class="game-card-text">Tantang refleks dan ketahananmu dengan menerbangkan burung melalui rintangan!</p>
-                        </div>
-                        <div class="play-button">MAIN</div>
-                    </div>
-                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="games.html">Games</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
+        </nav>
+
+        <!-- Games Content -->
+        <div class="page-content">
+            <section class="section games-content">
+                <div class="container py-4">
+                    <div class="game-cards-container">
+                        <!-- Game Card 1: Tic-Tac-Toe -->
+                        <a href="games/tic-tac-toe/tic-tac-toe.html" class="card-link">
+                            <div class="game-card">
+                                <div class="game-card-image">
+                                    <img src="assets/images/game/tictactoe.png" alt="Tic-Tac-Toe">
+                                </div>
+                                <div class="game-card-body">
+                                    <h5 class="game-card-title">Tic-Tac-Toe</h5>
+                                    <p class="game-card-text">Permainan klasik permainan pertarungan logika yang cepat untuk menang!</p>
+                                </div>
+                                <div class="play-button">MAIN</div>
+                            </div>
+                        </a>
+                        <!-- Game Card 2: Tetris -->
+                        <a href="games/tetris/tetris.html" class="card-link">
+                            <div class="game-card">
+                                <div class="game-card-image">
+                                    <img src="assets/images/game/tetris.png" alt="Tetris">
+                                </div>
+                                <div class="game-card-body">
+                                    <h5 class="game-card-title">Tetris</h5>
+                                    <p class="game-card-text">Game klasik dengan strategi dan kecepatan untuk menyusun balok yang turun!</p>
+                                </div>
+                                <div class="play-button">MAIN</div>
+                            </div>
+                        </a>
+                        <!-- Game Card 3: Checkers -->
+                        <a href="games/checkers/checkers.html" class="card-link">
+                            <div class="game-card">
+                                <div class="game-card-image">
+                                    <img src="assets/images/game/checkers.png" alt="Checkers">
+                                </div>
+                                <div class="game-card-body">
+                                    <h5 class="game-card-title">Checkers</h5>
+                                    <p class="game-card-text">Dapatkan strategi terbaikmu untuk mengalahkan lawan dengan melangkahi bidak!</p>
+                                </div>
+                                <div class="play-button">MAIN</div>
+                            </div>
+                        </a>
+                        <!-- Game Card 4: Flappy Bird -->
+                        <a href="games/flappy-bird/flappybird.html" class="card-link">
+                            <div class="game-card">
+                                <div class="game-card-image">
+                                    <img src="assets/images/game/flappybird.png" alt="Flappy Bird">
+                                </div>
+                                <div class="game-card-body">
+                                    <h5 class="game-card-title">Flappy Bird</h5>
+                                    <p class="game-card-text">Tantang refleks dan ketahananmu dengan menerbangkan burung melalui rintangan!</p>
+                                </div>
+                                <div class="play-button">MAIN</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
-
-    <!-- Game Elements -->
-    <div class="game-elements">
-        <img src="assets/images/mario.png" class="mario" id="mario" alt="Mario">
-        <img src="assets/images/wall.png" class="wall wall-left" alt="Wall">
-        <img src="assets/images/wall.png" class="wall wall-right" alt="Wall">
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <img src="assets/images/ground.png" class="ground-footer" alt="Ground">
-    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/scripts.js"></script>
