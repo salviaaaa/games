@@ -12,6 +12,12 @@
             background-size: cover;
             background-position: center;
             transition: transform 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
         }
         
         .play-button {
@@ -25,6 +31,12 @@
             text-decoration: none;
             border-radius: 0;
             text-transform: uppercase;
+        }
+        
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
     </style>
 </head>
@@ -70,49 +82,57 @@
         <div class="container py-4 games-container">
             <div class="game-cards-container">
                 <!-- Game Card 1: Tic-Tac-Toe -->
-                <div class="game-card">
-                    <div class="game-card-image">
-                        <img src="assets/images/game/tictactoe.png" alt="Tic-Tac-Toe">
+                <a href="games/tic-tac-toe/tic-tac-toe.html" class="card-link">
+                    <div class="game-card">
+                        <div class="game-card-image">
+                            <img src="assets/images/game/tictactoe.png" alt="Tic-Tac-Toe">
+                        </div>
+                        <div class="game-card-body">
+                            <h5 class="game-card-title">Tic-Tac-Toe</h5>
+                            <p class="game-card-text">Permainan klasik permainan pertarungan logika yang cepat untuk menang!</p>
+                        </div>
+                        <div class="play-button">MAIN</div>
                     </div>
-                    <div class="game-card-body">
-                        <h5 class="game-card-title">Tic-Tac-Toe</h5>
-                        <p class="game-card-text">Permainan klasik permainan pertarungan logika yang cepat untuk menang!</p>
-                    </div>
-                    <a href="#" class="play-button">PLAY</a>
-                </div>
+                </a>
                 <!-- Game Card 2: Tetris -->
-                <div class="game-card">
-                    <div class="game-card-image">
-                        <img src="assets/images/game/tetris.png" alt="Tetris">
+                <a href="games/tetris/tetris.html" class="card-link">
+                    <div class="game-card">
+                        <div class="game-card-image">
+                            <img src="assets/images/game/tetris.png" alt="Tetris">
+                        </div>
+                        <div class="game-card-body">
+                            <h5 class="game-card-title">Tetris</h5>
+                            <p class="game-card-text">Game klasik dengan strategi dan kecepatan untuk menyusun balok yang turun!</p>
+                        </div>
+                        <div class="play-button">MAIN</div>
                     </div>
-                    <div class="game-card-body">
-                        <h5 class="game-card-title">Tetris</h5>
-                        <p class="game-card-text">Game klasik dengan strategi dan kecepatan untuk menyusun balok yang turun!</p>
-                    </div>
-                    <a href="#" class="play-button">PLAY</a>
-                </div>
+                </a>
                 <!-- Game Card 3: Checkers -->
-                <div class="game-card">
-                    <div class="game-card-image">
-                        <img src="assets/images/game/checkers.png" alt="Checkers">
+                <a href="games/checkers/checkers.html" class="card-link">
+                    <div class="game-card">
+                        <div class="game-card-image">
+                            <img src="assets/images/game/checkers.png" alt="Checkers">
+                        </div>
+                        <div class="game-card-body">
+                            <h5 class="game-card-title">Checkers</h5>
+                            <p class="game-card-text">Dapatkan strategi terbaikmu untuk mengalahkan lawan dengan melangkahi bidak!</p>
+                        </div>
+                        <div class="play-button">MAIN</div>
                     </div>
-                    <div class="game-card-body">
-                        <h5 class="game-card-title">Checkers</h5>
-                        <p class="game-card-text">Dapatkan strategi terbaikmu untuk mengalahkan lawan dengan melangkahi bidak!</p>
-                    </div>
-                    <a href="#" class="play-button">PLAY</a>
-                </div>
+                </a>
                 <!-- Game Card 4: Flappy Bird -->
-                <div class="game-card">
-                    <div class="game-card-image">
-                        <img src="assets/images/game/flappybird.png" alt="Flappy Bird">
+                <a href="games/flappy-bird/flappybird.html" class="card-link">
+                    <div class="game-card">
+                        <div class="game-card-image">
+                            <img src="assets/images/game/flappybird.png" alt="Flappy Bird">
+                        </div>
+                        <div class="game-card-body">
+                            <h5 class="game-card-title">Flappy Bird</h5>
+                            <p class="game-card-text">Tantang refleks dan ketahananmu dengan menerbangkan burung melalui rintangan!</p>
+                        </div>
+                        <div class="play-button">MAIN</div>
                     </div>
-                    <div class="game-card-body">
-                        <h5 class="game-card-title">Flappy Bird</h5>
-                        <p class="game-card-text">Tantang refleks dan ketahananmu dengan menerbangkan burung melalui rintangan!</p>
-                    </div>
-                    <a href="#" class="play-button">PLAY</a>
-                </div>
+                </a>
             </div>
         </div>
     </div>
