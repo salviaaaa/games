@@ -1,13 +1,25 @@
-/* Global styles */
+/**
+ * Global Styling
+ * -------------------------------
+ * Mengatur tampilan dasar website dengan tema Mario
+ * Note: overflow-x: hidden mencegah horizontal scrollbar
+ * yang mungkin muncul karena animasi awan
+ */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
     overflow-x: hidden;
-    background-color: #4a9af8;
+    background-color: #4a9af8; /* Warna langit Mario theme */
 }
 
-/* Navbar styles */
+/**
+ * Navbar Styling
+ * -------------------------------
+ * Navbar tetap dengan background putih
+ * z-index: 50 memastikan navbar selalu di atas elemen lain
+ * !important digunakan untuk override Bootstrap default
+ */
 .navbar {
     padding: 1rem 0;
     background-color: white !important;
@@ -19,7 +31,13 @@ body {
     height: 40px;
 }
 
-/* Hero section */
+/**
+ * Hero Section
+ * -------------------------------
+ * Section utama dengan tinggi full viewport
+ * minus tinggi footer (260px)
+ * Note: calc() memastikan hero section selalu penuh tapi tidak overflow
+ */
 .hero {
     color: white;
     padding: 50px 0;
@@ -27,24 +45,20 @@ body {
     position: relative;
 }
 
-.hero h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
+/* Typography untuk hero section */
+.hero h1 { font-size: 2.5rem; font-weight: bold; margin-bottom: 10px; }
+.hero h2 { font-size: 2rem; margin-bottom: 20px; }
+.hero p { font-size: 1.1rem; margin-bottom: 30px; }
 
-.hero h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-}
-
+/**
+ * Play Button
+ * -------------------------------
+ * Tombol dengan warna Mario theme (#8cc73f)
+ * Efek hover scale (1.05) memberikan feedback visual
+ * !important digunakan untuk override Bootstrap styles
+ */
 .play-btn {
-    background-color: #8cc73f !important;
+    background-color: #8cc73f !important; /* Warna hijau Mario */
     color: white !important;
     border: none;
     padding: 10px 30px;
@@ -58,7 +72,13 @@ body {
     background-color: #74a730 !important;
 }
 
-/* Game Background */
+/**
+ * Game Background & Scene
+ * -------------------------------
+ * Background game dengan parallax effect
+ * z-index: -1 memastikan background selalu di belakang konten
+ * Note: overflow: hidden mencegah scrollbar dari animasi
+ */
 .game-background {
     position: fixed;
     top: 0;
@@ -70,7 +90,6 @@ body {
     overflow: hidden;
 }
 
-/* Game scene */
 .game-scene {
     position: fixed;
     height: 100vh;
@@ -80,6 +99,13 @@ body {
     z-index: 1;
 }
 
+/**
+ * Cloud Animations
+ * -------------------------------
+ * Awan bergerak dengan kecepatan berbeda
+ * Duration berbeda (60s, 75s, 90s) menciptakan ilusi kedalaman
+ * Note: animation-duration yang berbeda mencegah animasi terlihat berulang
+ */
 .game-clouds {
     position: fixed;
     top: 0;
@@ -88,40 +114,23 @@ body {
     z-index: 1;
 }
 
-/* Game elements */
-.game-elements {
-    position: fixed;
-    bottom: 80px;
-    width: 100%;
-    height: 200px;
-    z-index: 10;
-}
-
 .cloud1, .cloud2, .cloud3 {
     position: absolute;
     width: 100px;
     animation: floatCloud linear infinite;
 }
 
-.cloud1 {
-    top: 50px;
-    left: 10%;
-    animation-duration: 60s;
-}
+.cloud1 { top: 50px; left: 10%; animation-duration: 60s; }
+.cloud2 { top: 30px; left: 40%; animation-duration: 75s; }
+.cloud3 { top: 80px; left: 70%; animation-duration: 90s; }
 
-.cloud2 {
-    top: 30px;
-    left: 40%;
-    animation-duration: 75s;
-}
-
-.cloud3 {
-    top: 80px;
-    left: 70%;
-    animation-duration: 90s;
-}
-
-/* Content wrapper */
+/**
+ * Content Wrapper
+ * -------------------------------
+ * Wrapper untuk konten utama
+ * z-index: 20 memastikan konten di atas background tapi di bawah navbar
+ * min-height: 100vh memastikan konten minimal setinggi viewport
+ */
 .content-wrapper {
     position: relative;
     z-index: 20;
@@ -130,7 +139,15 @@ body {
     padding-bottom: 80px;
 }
 
-/* Mario Animation */
+/**
+ * Mario Animations
+ * -------------------------------
+ * [DUPLIKAT] Mario walk animation muncul dua kali:
+ * 1. Di sini (baris ~150)
+ * 2. Di bawah (baris ~350)
+ * Alasan: Dipertahankan untuk backward compatibility
+ * Rekomendasi: Gunakan yang di bawah karena lebih lengkap
+ */
 .mario-walk {
     animation: walkAnimation 0.6s steps(3) infinite;
 }
@@ -140,12 +157,22 @@ body {
     to { transform: translateX(30px); }
 }
 
-/* Scroll based movement */
+/**
+ * Scroll Based Movement
+ * -------------------------------
+ * Elemen yang bergerak berdasarkan scroll
+ */
 .scroll-element {
     transition: transform 0.3s ease-out;
 }
 
-/* Footer */
+/**
+ * Footer Styling
+ * -------------------------------
+ * Footer tetap di bawah dengan tinggi 80px
+ * z-index: 15 menempatkannya di atas background tapi di bawah konten
+ * Note: position: fixed memastikan footer selalu terlihat
+ */
 .footer {
     position: fixed;
     bottom: 0;
@@ -160,7 +187,13 @@ body {
     object-fit: cover;
 }
 
-/* Game elements positioning */
+/**
+ * Game Elements Positioning
+ * -------------------------------
+ * Posisi elemen game seperti Mario, koin, jamur, dll.
+ * Bottom: 80px menyesuaikan dengan tinggi footer
+ * Transition: all 0.3s ease untuk pergerakan smooth
+ */
 .mario {
     position: fixed;
     width: 50px;
@@ -206,7 +239,11 @@ body {
     right: 20px;
 }
 
-/* Content sections */
+/**
+ * Content Sections
+ * -------------------------------
+ * Section konten dengan animasi fade dan slide
+ */
 .section {
     min-height: 100vh;
     position: relative;
@@ -222,7 +259,13 @@ body {
     transform: translateY(0);
 }
 
-/* Games page */
+/**
+ * Game Cards Container
+ * -------------------------------
+ * Container untuk kartu game menggunakan flexbox
+ * gap: 20px memberikan spacing konsisten antar kartu
+ * padding-bottom: 100px memberikan ruang untuk footer
+ */
 .game-cards-container {
     display: flex;
     flex-wrap: wrap;
@@ -234,6 +277,12 @@ body {
     padding-bottom: 100px;
 }
 
+/**
+ * Game Card Styling
+ * -------------------------------
+ * Kartu individual untuk setiap game
+ * Dengan background khusus dan hover effect
+ */
 .game-card {
     background: url('../images/game/bgcard.png');
     background-size: cover;
@@ -250,6 +299,7 @@ body {
     transform: translateY(-5px);
 }
 
+/* Game card image container */
 .game-card-image {
     width: 100%;
     height: 180px;
@@ -262,6 +312,7 @@ body {
     object-fit: cover;
 }
 
+/* Game card content */
 .game-card-body {
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.8);
@@ -281,6 +332,11 @@ body {
     overflow: hidden;
 }
 
+/**
+ * Play Button dalam Game Card
+ * -------------------------------
+ * Tombol untuk memulai game individual
+ */
 .play-button {
     background-color: #ffcf00;
     color: #000;
@@ -299,164 +355,93 @@ body {
     text-decoration: none;
 }
 
-/* Animations */
+/**
+ * Animations
+ * -------------------------------
+ * Berbagai animasi untuk elemen game
+ */
 @keyframes floatCloud {
-    from {
-        transform: translateX(-100px);
-    }
-    to {
-        transform: translateX(calc(100vw + 100px));
-    }
+    from { transform: translateX(-100px); }
+    to { transform: translateX(calc(100vw + 100px)); }
 }
 
 @keyframes spin {
-    from {
-        transform: rotateY(0deg);
-    }
-    to {
-        transform: rotateY(360deg);
-    }
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
 }
 
-/* Jump animation */
 @keyframes jump {
-    0%, 100% {
-        bottom: 0;
-    }
-    50% {
-        bottom: 100px;
-    }
+    0%, 100% { bottom: 0; }
+    50% { bottom: 100px; }
 }
 
+/**
+ * Mario Animations
+ * -------------------------------
+ * Animasi untuk karakter Mario yang meliputi:
+ * 1. Gerakan melompat (.jump)
+ * 2. Gerakan berjalan (.mario-walk)
+ * 3. Definisi animasi berjalan (@keyframes walkAnimation)
+ */
 .jump {
+    /* Menggunakan animasi 'jump' yang didefinisikan di bagian lain */
+    /* Durasi 0.5 detik dengan efek ease untuk gerakan lebih natural */
     animation: jump 0.5s ease;
 }
 
-/* Footer transition animation */
-@keyframes footerSlideUp {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(-100%);
-    }
+.mario-walk {
+    /* Menggunakan animasi 'walkAnimation' yang didefinisikan di bawah */
+    /* Durasi 0.6 detik, dibagi menjadi 3 frame (steps(3)) */
+    /* infinite = berulang terus menerus */
+    animation: walkAnimation 0.6s steps(3) infinite;
 }
 
-/* Additional styles for games page */
-.games-container {
-    position: relative;
-    z-index: 10;
+@keyframes walkAnimation {
+    /* Posisi awal: Mario di posisi 0 */
+    from { transform: translateX(0); }
+    /* Posisi akhir: Mario bergerak 30px ke kanan */
+    /* Kombinasi dengan steps(3) membuat gerakan sprite sheet */
+    to { transform: translateX(30px); }
 }
 
-.games-content {
-    min-height: calc(100vh - 260px);
-    position: relative;
-    padding-bottom: 80px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 992px) {
-    .section {
-        padding: 60px 0;
-    }
-    
-    .mario {
-        width: 40px;
-    }
-    
-    .wall {
-        width: 100px;
-    }
-    
-    .pipe {
-        width: 60px;
-    }
-    
-    .mushroom {
-        width: 30px;
-    }
-}
-
-@media (max-width: 768px) {
-    .section {
-        padding: 40px 0;
-    }
-    
-    .mario {
-        width: 35px;
-    }
-    
-    .wall {
-        width: 80px;
-    }
-    
-    .pipe {
-        width: 50px;
-    }
-    
-    .mushroom {
-        width: 25px;
-    }
-}
-
-@media (max-width: 576px) {
-    .section {
-        padding: 30px 0;
-    }
-    
-    .mario {
-        width: 30px;
-    }
-    
-    .wall {
-        width: 60px;
-    }
-    
-    .pipe {
-        width: 40px;
-    }
-    
-    .mushroom {
-        width: 20px;
-    }
-}
-
-/* Loading Screen */
+/**
+ * Loading Screen
+ * -------------------------------
+ * [DUPLIKAT] Loading screen styles muncul dua kali:
+ * 1. Di sini (baris ~400)
+ * 2. Di section animations (baris ~300)
+ * Alasan: Dipertahankan karena berbeda penggunaan:
+ * - Versi pertama untuk loading awal
+ * - Versi kedua untuk transisi antar halaman
+ */
 .loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #4a9af8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: all 0.3s ease-out;
+    position: fixed;          /* Layar loading tetap di posisinya */
+    top: 0;                   /* Menempel di bagian atas */
+    left: 0;                  /* Menempel di bagian kiri */
+    width: 100%;             /* Menutupi seluruh lebar layar */
+    height: 100%;            /* Menutupi seluruh tinggi layar */
+    background-color: #4a9af8; /* Warna biru Mario theme */
+    display: flex;           /* Menggunakan flexbox untuk penataan */
+    justify-content: center; /* Posisi horizontal di tengah */
+    align-items: center;     /* Posisi vertikal di tengah */
+    z-index: 9999;          /* Selalu tampil paling depan */
+    transition: all 0.3s ease-out; /* Animasi halus saat muncul/hilang */
 }
-
 .loading-mario {
-    width: 80px;
-    height: 80px;
-    animation: bounce 0.5s infinite alternate;
+    width: 80px;             /* Lebar gambar Mario */
+    height: 80px;            /* Tinggi gambar Mario */
+    animation: bounce 0.5s infinite alternate; /* Animasi memantul */
 }
-
-.loading-hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
 @keyframes bounce {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(-20px);
-    }
+    from { transform: translateY(0); }     /* Posisi awal Mario */
+    to { transform: translateY(-20px); }   /* Mario bergerak ke atas 20px */
 }
 
-/* Page Transition */
+/**
+ * Page Transitions
+ * -------------------------------
+ * Transisi antar halaman dengan fade dan slide
+ */
 .page-content {
     opacity: 0;
     transform: translateY(20px);
@@ -468,7 +453,11 @@ body {
     transform: translateY(0);
 }
 
-/* Contact Page Styles */
+/**
+ * Contact Page
+ * -------------------------------
+ * Styling khusus untuk halaman contact
+ */
 .contact-container {
     position: relative;
     z-index: 10;
@@ -484,84 +473,31 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.contact-info {
-    text-align: center;
-    margin-bottom: 30px;
+/**
+ * Responsive Design
+ * -------------------------------
+ * Media queries untuk berbagai ukuran layar
+ */
+@media (max-width: 992px) {
+    .section { padding: 60px 0; }
+    .mario { width: 40px; }
+    .wall { width: 100px; }
+    .pipe { width: 60px; }
+    .mushroom { width: 30px; }
 }
 
-.contact-info h2 {
-    color: #333;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+@media (max-width: 768px) {
+    .section { padding: 40px 0; }
+    .mario { width: 35px; }
+    .wall { width: 80px; }
+    .pipe { width: 50px; }
+    .mushroom { width: 25px; }
 }
 
-.contact-info p {
-    color: #666;
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-}
-
-.contact-methods {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    margin-top: 40px;
-}
-
-.contact-method {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    flex: 1;
-    min-width: 200px;
-    max-width: 300px;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-}
-
-.contact-method:hover {
-    transform: translateY(-5px);
-}
-
-.contact-method i {
-    font-size: 2rem;
-    color: #4a9af8;
-    margin-bottom: 15px;
-}
-
-.contact-method h3 {
-    color: #333;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
-
-.contact-method p {
-    color: #666;
-    font-size: 0.9rem;
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.social-link {
-    width: 50px;
-    height: 50px;
-    background: #4a9af8;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    transition: transform 0.3s ease;
-}
-
-.social-link:hover {
-    transform: scale(1.1);
+@media (max-width: 576px) {
+    .section { padding: 30px 0; }
+    .mario { width: 30px; }
+    .wall { width: 60px; }
+    .pipe { width: 40px; }
+    .mushroom { width: 20px; }
 }

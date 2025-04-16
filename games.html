@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tag untuk pengaturan dasar -->
     <meta charset="UTF-8">
+    <!-- viewport: Mengatur tampilan responsif untuk berbagai device -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Games - Retro Games</title>
+    <!-- Bootstrap CSS dan CSS kustom -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Style kustom untuk kartu game -->
     <style>
-        .game-card {
-            background: url('assets/images/bgcard.png');
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.3s;
-            cursor: pointer;
-            position: relative;
+        /* kartu-game: Container untuk setiap game dengan efek hover */
+        .kartu-game {
+            background: url('assets/images/game/bgcard.png');
+            background-size: cover; /* Cover seluruh area */
+            background-position: center; /* Posisi gambar di tengah */
+            transition: transform 0.3s; /* Animasi smooth saat hover */
+            cursor: pointer; /* Cursor pointer untuk UX */
+            position: relative; /* Anchor untuk posisi absolut child */
         }
         
-        .game-card:hover {
-            transform: translateY(-10px);
+        /* Efek hover mengangkat kartu */
+        .kartu-game:hover {
+            transform: translateY(-10px); /* Animasi naik 10px */
         }
         
-        .play-button {
-            background-color: #ffcf00;
-            width: 100%;
+        /* tombol-main: CTA button dengan styling kustom */
+        .tombol-main {
+            background-color: #ffcf00; /* Warna kuning */
+            width: 100%; /* Full width */
             display: block;
             text-align: center;
             padding: 10px 0;
             font-weight: bold;
             color: #000;
             text-decoration: none;
-            border-radius: 0;
-            text-transform: uppercase;
+            border-radius: 0; /* Sudut kotak */
+            text-transform: uppercase; /* Teks kapital */
         }
         
-        .card-link {
+        /* link-kartu: Reset styling default link */
+        .link-kartu {
             text-decoration: none;
             color: inherit;
             display: block;
@@ -41,119 +49,150 @@
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen">
+    <!-- Loading Screen: Overlay dengan animasi -->
+    <div class="loading-screen"> <!-- Position: absolute, full screen -->
         <img src="assets/images/mario.gif" alt="Loading..." class="loading-mario">
     </div>
 
-    <!-- Game Background -->
-    <div class="game-background">
-        <!-- Clouds -->
-        <div class="game-scene">
+    <!-- Game Background: Container untuk efek parallax -->
+    <div class="game-background"> <!-- Position: relative sebagai anchor -->
+        <!-- Game Scene: Area untuk awan bergerak -->
+        <div class="game-scene"> <!-- Position: relative untuk awan -->
+            <!-- scroll-element: Kelas untuk efek parallax scrolling -->
             <img src="assets/images/cloud.png" class="cloud1 scroll-element" alt="Cloud">
             <img src="assets/images/cloud.png" class="cloud2 scroll-element" alt="Cloud">
             <img src="assets/images/cloud.png" class="cloud3 scroll-element" alt="Cloud">
         </div>
         
-        <!-- Game Elements -->
-        <div class="game-elements">
+        <!-- Game Elements: Kontainer untuk sprite game -->
+        <div class="game-elements"> <!-- Position: relative untuk sprite -->
             <img src="assets/images/mario.png" class="mario" id="mario" alt="Mario">
             <img src="assets/images/mushroom.png" class="mushroom scroll-element" alt="Mushroom">
             <img src="assets/images/wall.png" class="wall wall-left scroll-element" alt="Wall">
             <img src="assets/images/wall.png" class="wall wall-right scroll-element" alt="Wall">
         </div>
 
-        <!-- Footer -->
-        <footer class="footer">
+        <!-- Footer dengan Ground Sprite -->
+        <footer class="footer"> <!-- Position: fixed bottom -->
             <img src="assets/images/ground.png" class="ground-footer" alt="Ground">
         </footer>
     </div>
 
-    <!-- Content -->
-    <div class="content-wrapper">
-        <!-- Navbar -->
+    <!-- Wrapper Konten Utama -->
+    <div class="wadah-konten"> <!-- Container utama dengan z-index -->
+        <!-- Navbar: Sistem navigasi responsif -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="#">
+            <!-- navbar-expand-lg: Melebar pada viewport >= 992px
+                 navbar-light: Teks gelap untuk background terang
+                 bg-light: Background warna terang -->
+            
+            <div class="kontainer"> <!-- container: Max-width responsif dengan padding -->
+                <!-- Logo Website -->
+                <a class="merek-navbar" href="#"> <!-- navbar-brand: Styling untuk brand -->
                     <img src="assets/images/logo.png" alt="Retro Logo" class="logo">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                
+                <!-- Tombol Toggle untuk Mobile -->
+                <button class="tombol-toggle navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <!-- navbar-toggler: Tombol hamburger responsif -->
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                
+                <!-- Menu Navigasi Collapsible -->
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
+                    <!-- collapse: Hidden pada mobile
+                         navbar-collapse: Behavior collapse -->
+                    
+                    <ul class="navbar-nav margin-kiri-auto">
+                        <!-- navbar-nav: Container flex untuk menu
+                             ms-auto: Margin start auto (push kanan) -->
+                        
+                        <li class="item-nav">
+                            <a class="link-nav" href="index.html">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="games.html">Games</a>
+                        <li class="item-nav">
+                            <a class="link-nav active" href="games.html">
+                                <!-- active: Menandakan halaman saat ini -->
+                                Games
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
+                        <li class="item-nav">
+                            <a class="link-nav" href="about.html">About</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                        <li class="item-nav">
+                            <a class="link-nav" href="contact.html">Contact</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <!-- Games Content -->
-        <div class="page-content">
-            <section class="section games-content">
-                <div class="container py-4">
-                    <div class="game-cards-container">
-                        <!-- Game Card 1: Tic-Tac-Toe -->
-                        <a href="games/tic-tac-toe/tic-tac-toe.html" class="card-link">
-                            <div class="game-card">
-                                <div class="game-card-image">
+        <!-- Konten Games -->
+        <div class="konten-halaman">
+            <!-- Section Games dengan Grid Kartu -->
+            <section class="bagian konten-games">
+                <div class="kontainer padding-y-4">
+                    <!-- py-4: Padding atas-bawah 1.5rem -->
+                    
+                    <!-- Grid Container untuk Kartu Game -->
+                    <div class="kontainer-kartu-game">
+                        <!-- Kartu Game: Tic-Tac-Toe -->
+                        <a href="games/tic-tac-toe/tic-tac-toe.html" class="link-kartu">
+                            <!-- link-kartu: Reset styling link -->
+                            <div class="kartu-game">
+                                <!-- kartu-game: Container dengan efek hover -->
+                                <div class="gambar-kartu-game">
+                                    <!-- Container untuk gambar game -->
                                     <img src="assets/images/game/tictactoe.png" alt="Tic-Tac-Toe">
                                 </div>
-                                <div class="game-card-body">
-                                    <h5 class="game-card-title">Tic-Tac-Toe</h5>
-                                    <p class="game-card-text">Permainan klasik permainan pertarungan logika yang cepat untuk menang!</p>
+                                <div class="badan-kartu-game">
+                                    <!-- Area konten kartu -->
+                                    <h5 class="judul-kartu-game">Tic-Tac-Toe</h5>
+                                    <p class="teks-kartu-game">Permainan klasik pertarungan logika yang cepat untuk menang!</p>
                                 </div>
-                                <div class="play-button">MAIN</div>
+                                <div class="tombol-main">MAIN</div>
                             </div>
                         </a>
-                        <!-- Game Card 2: Tetris -->
-                        <a href="games/tetris/tetris.html" class="card-link">
-                            <div class="game-card">
-                                <div class="game-card-image">
+
+                        <!-- Kartu Game: Tetris -->
+                        <a href="games/tetris/tetris.html" class="link-kartu">
+                            <div class="kartu-game">
+                                <div class="gambar-kartu-game">
                                     <img src="assets/images/game/tetris.png" alt="Tetris">
                                 </div>
-                                <div class="game-card-body">
-                                    <h5 class="game-card-title">Tetris</h5>
-                                    <p class="game-card-text">Game klasik dengan strategi dan kecepatan untuk menyusun balok yang turun!</p>
+                                <div class="badan-kartu-game">
+                                    <h5 class="judul-kartu-game">Tetris</h5>
+                                    <p class="teks-kartu-game">Game klasik dengan strategi dan kecepatan untuk menyusun balok yang turun!</p>
                                 </div>
-                                <div class="play-button">MAIN</div>
+                                <div class="tombol-main">MAIN</div>
                             </div>
                         </a>
-                        <!-- Game Card 3: Checkers -->
-                        <a href="games/checkers/checkers.html" class="card-link">
-                            <div class="game-card">
-                                <div class="game-card-image">
+
+                        <!-- Kartu Game: Checkers -->
+                        <a href="games/checkers/checkers.html" class="link-kartu">
+                            <div class="kartu-game">
+                                <div class="gambar-kartu-game">
                                     <img src="assets/images/game/checkers.png" alt="Checkers">
                                 </div>
-                                <div class="game-card-body">
-                                    <h5 class="game-card-title">Checkers</h5>
-                                    <p class="game-card-text">Dapatkan strategi terbaikmu untuk mengalahkan lawan dengan melangkahi bidak!</p>
+                                <div class="badan-kartu-game">
+                                    <h5 class="judul-kartu-game">Checkers</h5>
+                                    <p class="teks-kartu-game">Dapatkan strategi terbaikmu untuk mengalahkan lawan dengan melangkahi bidak!</p>
                                 </div>
-                                <div class="play-button">MAIN</div>
+                                <div class="tombol-main">MAIN</div>
                             </div>
                         </a>
-                        <!-- Game Card 4: Flappy Bird -->
-                        <a href="games/flappy-bird/flappybird.html" class="card-link">
-                            <div class="game-card">
-                                <div class="game-card-image">
+
+                        <!-- Kartu Game: Flappy Bird -->
+                        <a href="games/flappy-bird/flappybird.html" class="link-kartu">
+                            <div class="kartu-game">
+                                <div class="gambar-kartu-game">
                                     <img src="assets/images/game/flappybird.png" alt="Flappy Bird">
                                 </div>
-                                <div class="game-card-body">
-                                    <h5 class="game-card-title">Flappy Bird</h5>
-                                    <p class="game-card-text">Tantang refleks dan ketahananmu dengan menerbangkan burung melalui rintangan!</p>
+                                <div class="badan-kartu-game">
+                                    <h5 class="judul-kartu-game">Flappy Bird</h5>
+                                    <p class="teks-kartu-game">Tantang refleks dan ketahananmu dengan menerbangkan burung melalui rintangan!</p>
                                 </div>
-                                <div class="play-button">MAIN</div>
+                                <div class="tombol-main">MAIN</div>
                             </div>
                         </a>
                     </div>
@@ -162,6 +201,7 @@
         </div>
     </div>
 
+    <!-- Script JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/scripts.js"></script>
 </body>

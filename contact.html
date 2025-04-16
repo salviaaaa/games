@@ -1,109 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tag untuk pengaturan dasar -->
     <meta charset="UTF-8">
+    <!-- viewport: Mengatur tampilan responsif untuk berbagai device -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Retro Games</title>
+    <!-- Bootstrap CSS, Font Awesome, dan CSS kustom -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome: Library untuk ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen">
+    <!-- Loading Screen: Overlay dengan animasi -->
+    <div class="loading-screen"> <!-- Position: absolute, full screen -->
         <img src="assets/images/mario.gif" alt="Loading..." class="loading-mario">
     </div>
 
-    <!-- Game Background -->
-    <div class="game-background">
-        <!-- Clouds -->
-        <div class="game-scene">
+    <!-- Game Background: Container untuk efek parallax -->
+    <div class="game-background"> <!-- Position: relative sebagai anchor -->
+        <!-- Game Scene: Area untuk awan bergerak -->
+        <div class="game-scene"> <!-- Position: relative untuk awan -->
+            <!-- scroll-element: Kelas untuk efek parallax scrolling -->
             <img src="assets/images/cloud.png" class="cloud1 scroll-element" alt="Cloud">
             <img src="assets/images/cloud.png" class="cloud2 scroll-element" alt="Cloud">
             <img src="assets/images/cloud.png" class="cloud3 scroll-element" alt="Cloud">
         </div>
         
-        <!-- Game Elements -->
-        <div class="game-elements">
+        <!-- Game Elements: Kontainer untuk sprite game -->
+        <div class="game-elements"> <!-- Position: relative untuk sprite -->
             <img src="assets/images/mario.png" class="mario" id="mario" alt="Mario">
             <img src="assets/images/wall.png" class="wall wall-left scroll-element" alt="Wall">
             <img src="assets/images/wall.png" class="wall wall-right scroll-element" alt="Wall">
         </div>
 
-        <!-- Footer -->
-        <footer class="footer">
+        <!-- Footer dengan Ground Sprite -->
+        <footer class="footer"> <!-- Position: fixed bottom -->
             <img src="assets/images/ground.png" class="ground-footer" alt="Ground">
         </footer>
     </div>
 
-    <!-- Content -->
-    <div class="content-wrapper">
-        <!-- Navbar -->
+    <!-- Wrapper Konten Utama -->
+    <div class="wadah-konten"> <!-- Container utama dengan z-index -->
+        <!-- Navbar: Sistem navigasi responsif Bootstrap -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="#">
+            <!-- navbar-expand-lg: Melebar pada viewport >= 992px
+                 navbar-light: Teks gelap untuk background terang
+                 bg-light: Background warna terang -->
+            
+            <div class="kontainer"> <!-- container: Max-width responsif dengan padding -->
+                <!-- Logo Website -->
+                <a class="merek-navbar" href="#"> <!-- navbar-brand: Styling untuk brand -->
                     <img src="assets/images/logo.png" alt="Retro Logo" class="logo">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                
+                <!-- Tombol Toggle untuk Mobile -->
+                <button class="tombol-toggle navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <!-- navbar-toggler: Tombol hamburger responsif -->
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                
+                <!-- Menu Navigasi Collapsible -->
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
+                    <!-- collapse: Hidden pada mobile
+                         navbar-collapse: Behavior collapse -->
+                    
+                    <ul class="navbar-nav margin-kiri-auto">
+                        <!-- navbar-nav: Container flex untuk menu
+                             ms-auto: Margin start auto (push kanan) -->
+                        
+                        <li class="item-nav"> <!-- nav-item: Wrapper item menu -->
+                            <a class="link-nav" href="index.html">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="games.html">Games</a>
+                        <li class="item-nav">
+                            <a class="link-nav" href="games.html">Games</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
+                        <li class="item-nav">
+                            <a class="link-nav" href="about.html">About</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="contact.html">Contact</a>
+                        <li class="item-nav">
+                            <a class="link-nav active" href="contact.html">
+                                <!-- active: Menandakan halaman saat ini -->
+                                Contact
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <!-- Contact Content -->
-        <div class="page-content">
-            <section class="section contact-container">
-                <div class="container">
-                    <div class="contact-box">
-                        <div class="contact-info">
+        <!-- Konten Halaman Kontak -->
+        <div class="konten-halaman">
+            <!-- Section Kontak dengan Card Design -->
+            <section class="bagian kontak-kontainer">
+                <div class="kontainer"> <!-- Container Bootstrap untuk max-width -->
+                    <!-- Kotak Kontak: Card dengan informasi kontak -->
+                    <div class="kotak-kontak"> <!-- Card dengan shadow dan padding -->
+                        <!-- Header Informasi -->
+                        <div class="info-kontak"> <!-- Text center dengan margin -->
                             <h2>Mari Terhubung!</h2>
                             <p>Kami selalu senang mendengar dari para pemain. Pilih cara yang paling nyaman untuk menghubungi kami!</p>
                         </div>
                         
-                        <div class="contact-methods">
-                            <div class="contact-method">
-                                <i class="fas fa-envelope"></i>
+                        <!-- Grid Metode Kontak -->
+                        <div class="metode-kontak">
+                            <!-- Metode Email -->
+                            <div class="metode"> <!-- Card dengan ikon dan teks -->
+                                <i class="fas fa-envelope"></i> <!-- Font Awesome icon -->
                                 <h3>Email</h3>
                                 <p>Kirim kami email untuk pertanyaan dan saran</p>
-                                <a href="mailto:contact@retrogames.com" class="btn btn-primary mt-3">Email Kami</a>
+                                <!-- btn btn-primary: Tombol utama Bootstrap -->
+                                <a href="mailto:contact@retrogames.com" class="tombol tombol-utama margin-atas-3">Email Kami</a>
                             </div>
                             
-                            <div class="contact-method">
+                            <!-- Metode Live Chat -->
+                            <div class="metode">
                                 <i class="fas fa-comments"></i>
                                 <h3>Live Chat</h3>
                                 <p>Chat langsung dengan tim support kami</p>
-                                <button class="btn btn-primary mt-3">Mulai Chat</button>
+                                <button class="tombol tombol-utama margin-atas-3">Mulai Chat</button>
                             </div>
                             
-                            <div class="contact-method">
+                            <!-- Metode Discord -->
+                            <div class="metode">
                                 <i class="fas fa-headset"></i>
                                 <h3>Discord</h3>
                                 <p>Bergabung dengan komunitas gaming kami</p>
-                                <a href="#" class="btn btn-primary mt-3">Join Discord</a>
+                                <a href="#" class="tombol tombol-utama margin-atas-3">Join Discord</a>
                             </div>
                         </div>
                         
-                        <div class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <!-- Link Media Sosial -->
+                        <div class="link-sosial">
+                            <!-- Grid untuk ikon sosial media -->
+                            <!-- link-sosmed: Styling khusus untuk link sosmed -->
+                            <a href="#" class="link-sosmed">
+                                <i class="fab fa-facebook-f"></i> <!-- Font Awesome brand icon -->
+                            </a>
+                            <a href="#" class="link-sosmed">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="link-sosmed">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="link-sosmed">
+                                <i class="fab fa-youtube"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -111,6 +154,7 @@
         </div>
     </div>
 
+    <!-- Script JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/scripts.js"></script>
 </body>

@@ -1,79 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tag untuk pengaturan dasar -->
     <meta charset="UTF-8">
+    <!-- viewport: Mengatur tampilan responsif
+         width=device-width: Menyesuaikan dengan lebar device
+         initial-scale=1.0: Set zoom awal -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Retro Games</title>
+    <!-- Bootstrap CSS untuk layout responsif -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen">
+    <!-- Loading Screen: Overlay animasi loading -->
+    <div class="loading-screen"> <!-- Position: absolute, z-index tinggi -->
         <img src="assets/images/mario.gif" alt="Loading..." class="loading-mario">
     </div>
 
-    <!-- Game Background -->
-    <div class="game-background">
-        <!-- Clouds -->
-        <div class="game-scene">
+    <!-- Game Background: Container untuk efek parallax -->
+    <div class="game-background"> <!-- Position: relative untuk anchor -->
+        <!-- Game Scene: Wadah untuk awan bergerak -->
+        <div class="game-scene"> <!-- Position: relative untuk awan -->
+            <!-- scroll-element: Kelas untuk efek parallax
+                 cloud1/2/3: Posisi berbeda untuk setiap awan -->
             <img src="assets/images/cloud.png" class="cloud1 scroll-element" alt="Cloud">
             <img src="assets/images/cloud.png" class="cloud2 scroll-element" alt="Cloud">
             <img src="assets/images/cloud.png" class="cloud3 scroll-element" alt="Cloud">
         </div>
         
-        <!-- Game Elements -->
-        <div class="game-elements">
+        <!-- Game Elements: Area untuk sprite game -->
+        <div class="game-elements"> <!-- Position: relative untuk sprite -->
             <img src="assets/images/mario.png" class="mario" id="mario" alt="Mario">
             <img src="assets/images/mushroom.png" class="mushroom scroll-element" alt="Mushroom">
             <img src="assets/images/wall.png" class="wall wall-left scroll-element" alt="Wall">
             <img src="assets/images/wall.png" class="wall wall-right scroll-element" alt="Wall">
         </div>
 
-        <!-- Footer -->
-        <footer class="footer">
+        <!-- Footer dengan Ground Sprite -->
+        <footer class="footer"> <!-- Position: fixed bottom -->
             <img src="assets/images/ground.png" class="ground-footer" alt="Ground">
         </footer>
     </div>
 
-    <!-- Content -->
-    <div class="content-wrapper">
-        <!-- Navbar -->
+    <!-- Wrapper Konten Utama -->
+    <div class="wadah-konten"> <!-- Container utama dengan z-index -->
+        <!-- Navbar: Sistem navigasi responsif Bootstrap -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="#">
+            <!-- navbar-expand-lg: Melebar pada viewport >= 992px
+                 navbar-light: Teks gelap untuk background terang
+                 bg-light: Background warna terang -->
+            
+            <div class="kontainer"> <!-- container: Max-width responsif dengan padding -->
+                <!-- Logo Website -->
+                <a class="merek-navbar" href="#"> <!-- navbar-brand: Styling untuk brand -->
                     <img src="assets/images/logo.png" alt="Retro Logo" class="logo">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                
+                <!-- Tombol Toggle untuk Mobile -->
+                <button class="tombol-toggle navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <!-- navbar-toggler: Tombol hamburger responsif -->
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                
+                <!-- Menu Navigasi Collapsible -->
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
+                    <!-- collapse: Hidden pada mobile
+                         navbar-collapse: Behavior collapse -->
+                    
+                    <ul class="navbar-nav margin-kiri-auto">
+                        <!-- navbar-nav: Container flex untuk menu
+                             ms-auto: Margin start auto (push kanan) -->
+                        
+                        <li class="item-nav"> <!-- nav-item: Wrapper item menu -->
+                            <a class="link-nav" href="index.html">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="games.html">Games</a>
+                        <li class="item-nav">
+                            <a class="link-nav" href="games.html">Games</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="about.html">About</a>
+                        <li class="item-nav">
+                            <a class="link-nav active" href="about.html">
+                                <!-- active: Menandakan halaman saat ini -->
+                                About
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                        <li class="item-nav">
+                            <a class="link-nav" href="contact.html">Contact</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <!-- About Content -->
-        <div class="page-content">
-            <section class="section about-container">
-                <div class="container py-5">
-                    <div class="row">
-                        <div class="col-md-8 mx-auto text-center text-white">
-                            <h1 class="mb-4">Tentang Retro Games</h1>
-                            <p class="lead">
+        <!-- Konten About -->
+        <div class="konten-halaman">
+            <!-- Section About dengan styling kustom -->
+            <section class="bagian tentang-kontainer">
+                <div class="kontainer padding-y-5">
+                    <!-- py-5: Padding atas-bawah 3rem -->
+                    
+                    <div class="baris">
+                        <!-- row: Grid system Bootstrap -->
+                        
+                        <div class="kolom-md-8 margin-x-auto text-center text-putih">
+                            <!-- col-md-8: Lebar 8/12 pada viewport >= 768px
+                                 mx-auto: Margin horizontal auto untuk centering
+                                 text-center: Align teks ke tengah
+                                 text-white: Warna teks putih -->
+                            
+                            <h1 class="margin-bawah-4">
+                                <!-- mb-4: Margin bottom 1.5rem -->
+                                Tentang Retro Games
+                            </h1>
+                            <p class="teks-utama">
+                                <!-- lead: Teks yang lebih besar untuk emphasis -->
                                 Retro Games adalah platform yang didedikasikan untuk menghidupkan kembali nostalgia permainan klasik yang telah mewarnai masa kecil kita. Kami menghadirkan koleksi game-game legendaris dalam format yang dapat diakses dengan mudah di era modern.
                             </p>
                             <p>
@@ -86,6 +126,7 @@
         </div>
     </div>
 
+    <!-- Script JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/scripts.js"></script>
 </body>
