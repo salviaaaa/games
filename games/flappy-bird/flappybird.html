@@ -16,8 +16,8 @@
     </style>
 </head>
 <body class="bg-dark">
-    <!-- Tombol Kembali -->
-    <a href="../../games.html" class="btn btn-secondary back-button">Kembali ke Daftar Game</a>
+    <!-- Back Button -->
+    <a href="../../games.html" class="btn btn-secondary back-button">Back to Games List</a>
     
     <!-- Game Background -->
     <div class="game-background">
@@ -30,16 +30,44 @@
         <div class="row justify-content-center">
             <div class="col-md-6 text-center">
                 <h1 class="text-light mb-4">Flappy Bird</h1>
-                <div class="game-container">
-                    <canvas id="gameCanvas" width="320" height="480"></canvas>
-                    <div class="score-container">
-                        <div class="score text-light">Score: <span id="score">0</span></div>
-                        <div class="high-score text-light">High Score: <span id="highScore">0</span></div>
+                
+                <!-- Game Cover -->
+                <div id="game-cover" class="mb-4">
+                    <img src="../../assets/images/game/flappybird.png" alt="Flappy Bird Game" class="img-fluid rounded game-cover-img mb-4">
+                    <div class="rules-container bg-light p-3 rounded text-start mb-4">
+                        <h4 class="text-center">How to Play Flappy Bird</h4>
+                        <ul>
+                            <li>In Flappy Bird, your task is to keep the bird flying and avoid obstacles.</li>
+                            <li>Click or press space to make the bird fly higher.</li>
+                            <li>Avoid the green pipes that appear as obstacles.</li>
+                            <li>Every time you pass through a pair of pipes, you earn a point.</li>
+                            <li>The game ends if the bird hits a pipe or falls to the ground.</li>
+                        </ul>
                     </div>
-                    <button id="startButton" class="btn btn-success mt-3">Mulai Game</button>
-                    <div id="gameOver" class="game-over d-none">
-                        <h2 class="text-danger">Game Over!</h2>
-                        <button id="restartButton" class="btn btn-primary mt-2">Main Lagi</button>
+                    <div class="player-name-form mb-4">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="playerName" placeholder="Enter Your Name">
+                        </div>
+                        <button class="btn btn-primary" onclick="startFlappyBirdGame()">Start Playing</button>
+                    </div>
+                </div>
+                
+                <!-- Game Content -->
+                <div id="game-content" class="d-none">
+                    <div class="player-display mb-3 text-light">
+                        <h4>Player: <span id="currentPlayerName">Player</span></h4>
+                    </div>
+                    <div class="game-container">
+                        <canvas id="gameCanvas" width="320" height="480"></canvas>
+                        <div class="score-container">
+                            <div class="score text-light">Score: <span id="score">0</span></div>
+                            <div class="high-score text-light">High Score: <span id="highScore">0</span></div>
+                        </div>
+                        <button id="startButton" class="btn btn-success mt-3">Start Game</button>
+                        <div id="gameOver" class="game-over d-none">
+                            <h2 class="text-danger">Game Over!</h2>
+                            <button id="restartButton" class="btn btn-primary mt-2">Play Again</button>
+                        </div>
                     </div>
                 </div>
             </div>

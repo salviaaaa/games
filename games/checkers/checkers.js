@@ -11,10 +11,16 @@ let gameState = {
     isGameOver: false
 };
 
+// Function to show mode selection after clicking start button from cover
+function showModeSelection() {
+    document.getElementById('game-cover').classList.add('d-none');
+    document.getElementById('mode-selection').classList.remove('d-none');
+}
+
 function initializeBoard() {
     gameState.board = Array(8).fill().map(() => Array(8).fill(null));
     
-    // Menempatkan bidak pemain 1
+    // Place player 1 pieces
     for (let row = 0; row < 3; row++) {
         for (let col = 0; col < 8; col++) {
             if ((row + col) % 2 === 1) {
@@ -23,7 +29,7 @@ function initializeBoard() {
         }
     }
     
-    // Menempatkan bidak pemain 2
+    // Place player 2 pieces
     for (let row = 5; row < 8; row++) {
         for (let col = 0; col < 8; col++) {
             if ((row + col) % 2 === 1) {
@@ -56,10 +62,10 @@ function backToModeSelection() {
 
 function startGame() {
     if (gameState.gameMode === 'friend') {
-        gameState.player1Name = document.getElementById('player1Name').value || 'Pemain 1';
-        gameState.player2Name = document.getElementById('player2Name').value || 'Pemain 2';
+        gameState.player1Name = document.getElementById('player1Name').value || 'Player 1';
+        gameState.player2Name = document.getElementById('player2Name').value || 'Player 2';
     } else {
-        gameState.player1Name = document.getElementById('playerName').value || 'Pemain';
+        gameState.player1Name = document.getElementById('playerName').value || 'Player';
         gameState.player2Name = 'Bot';
     }
     
@@ -130,7 +136,7 @@ function getValidMoves(row, col) {
     
     for (const rowDir of directions) {
         for (const colDir of [-1, 1]) {
-            // Gerakan normal
+            // Normal movement
             const newRow = row + rowDir;
             const newCol = col + colDir;
             
@@ -138,7 +144,7 @@ function getValidMoves(row, col) {
                 moves.push({ row: newRow, col: newCol });
             }
             
-            // Gerakan lompat
+            // Jump movement
             const jumpRow = row + rowDir * 2;
             const jumpCol = col + colDir * 2;
             
@@ -162,17 +168,17 @@ function movePiece(newRow, newCol) {
     const { row: oldRow, col: oldCol } = gameState.selectedPiece;
     const piece = gameState.board[oldRow][oldCol];
     
-    // Pindahkan bidak
+    // Move piece
     gameState.board[newRow][newCol] = piece;
     gameState.board[oldRow][oldCol] = null;
     
-    // Cek apakah ada bidak yang dilompati
+    // Check if a piece was jumped
     if (Math.abs(newRow - oldRow) === 2) {
         const jumpedRow = (newRow + oldRow) / 2;
         const jumpedCol = (newCol + oldCol) / 2;
         gameState.board[jumpedRow][jumpedCol] = null;
         
-        // Tambah poin
+        // Add points
         if (gameState.currentPlayer === 1) {
             gameState.player1Score++;
         } else {
@@ -180,12 +186,12 @@ function movePiece(newRow, newCol) {
         }
     }
     
-    // Cek raja
+    // Check for king
     if ((piece.player === 1 && newRow === 7) || (piece.player === 2 && newRow === 0)) {
         piece.isKing = true;
     }
     
-    // Ganti giliran
+    // Switch turns
     gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
     gameState.selectedPiece = null;
     gameState.validMoves = [];
@@ -219,7 +225,7 @@ function checkGameOver() {
     if (player1Pieces === 0 || player2Pieces === 0) {
         gameState.isGameOver = true;
         const winner = player1Pieces > 0 ? gameState.player1Name : gameState.player2Name;
-        alert(`Game Over! ${winner} menang!`);
+        alert(`Game Over! ${winner} wins!`);
     }
 }
 
@@ -228,19 +234,19 @@ function makeBotMove() {
     let bestPiece = null;
     let maxScore = -Infinity;
     
-    // Cari semua bidak bot
+    // Find all bot pieces
     for (let row = 0; row < 8; row++) {
         for (let col = 0; col < 8; col++) {
             const piece = gameState.board[row][col];
             if (piece && piece.player === 2) {
                 const moves = getValidMoves(row, col);
                 for (const move of moves) {
-                    let score = Math.random() * 10; // Faktor random untuk variasi
+                    let score = Math.random() * 10; // Random factor for variation
                     
-                    // Prioritaskan gerakan lompat
+                    // Prioritize jump moves
                     if (move.isJump) score += 20;
                     
-                    // Prioritaskan menjadi raja
+                    // Prioritize becoming king
                     if (move.row === 0) score += 15;
                     
                     if (score > maxScore) {

@@ -3,12 +3,29 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 let gameStarted = false;
 let gameOver = false;
+let playerName = "Player";
+
+// Bird image
+const birdImg = new Image();
+birdImg.src = '../../assets/images/game/flappybird.gif';
+
+// Pipe image
+const pipeImg = new Image();
+pipeImg.src = '../../assets/images/greenpipes.png';
+
+// Function to start game from cover screen
+function startFlappyBirdGame() {
+    playerName = document.getElementById('playerName').value || "Player";
+    document.getElementById('currentPlayerName').textContent = playerName;
+    document.getElementById('game-cover').classList.add('d-none');
+    document.getElementById('game-content').classList.remove('d-none');
+}
 
 // Bird properties
 const bird = {
     x: 50,
     y: canvas.height / 2,
-    width: 30,
+    width: 34,
     height: 24,
     gravity: 0.5,
     velocity: 0,
@@ -102,8 +119,7 @@ function animate() {
     bird.y += bird.velocity;
 
     // Draw bird
-    ctx.fillStyle = '#f4d03f';
-    ctx.fillRect(bird.x, bird.y, bird.width, bird.height);
+    ctx.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 
     // Update and draw pipes
     pipeSpawnTimer++;
@@ -116,9 +132,17 @@ function animate() {
         const pipe = pipes[i];
         pipe.x -= 2;
 
-        // Draw pipe
-        ctx.fillStyle = '#2ecc71';
-        ctx.fillRect(pipe.x, pipe.y, pipe.width, pipe.height);
+        // Draw pipe using image
+        if (i % 2 === 0) {
+            // Top pipe (flipped)
+            ctx.save();
+            ctx.scale(1, -1);
+            ctx.drawImage(pipeImg, pipe.x, -pipe.y - pipe.height, pipe.width, pipe.height);
+            ctx.restore();
+        } else {
+            // Bottom pipe
+            ctx.drawImage(pipeImg, pipe.x, pipe.y, pipe.width, pipe.height);
+        }
 
         // Check collision
         if (

@@ -16,8 +16,8 @@
     </style>
 </head>
 <body class="bg-light">
-    <!-- Tombol Kembali -->
-    <a href="../../games.html" class="btn btn-secondary back-button">Kembali ke Daftar Game</a>
+    <!-- Back Button -->
+    <a href="../../games.html" class="btn btn-secondary back-button">Back to Games List</a>
     
     <!-- Game Background -->
     <div class="game-background">
@@ -31,17 +31,43 @@
             <div class="col-md-6 text-center">
                 <h1 class="mb-4">Tic Tac Toe</h1>
                 
+                <!-- Game Cover -->
+                <div id="game-cover" class="mb-4">
+                    <img src="../../assets/images/game/tictactoe.png" alt="Tic Tac Toe Game" class="img-fluid rounded game-cover-img mb-4">
+                    <div class="rules-container bg-light p-3 rounded text-start mb-4">
+                        <h4 class="text-center">How to Play Tic Tac Toe</h4>
+                        <ul>
+                            <li>The game is played on a 3x3 grid.</li>
+                            <li>Two players take turns placing X and O marks in empty squares.</li>
+                            <li>The first player uses symbol X, and the second player uses symbol O.</li>
+                            <li>The winner is the player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row.</li>
+                            <li>If all squares are filled and no player has won, the game ends in a draw.</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary" onclick="showGameModeSelection()">Start Playing</button>
+                </div>
+                
                 <!-- Mode Selection -->
-                <div id="mode-selection" class="mb-4">
-                    <h3 class="mb-3">Pilih Mode Permainan</h3>
-                    <button class="btn btn-primary me-2" onclick="startGame('friend')">Bermain dengan Teman</button>
-                    <button class="btn btn-success" onclick="startGame('bot')">Bermain dengan Bot</button>
+                <div id="mode-selection" class="mb-4 d-none">
+                    <h3 class="mb-3">Select Game Mode</h3>
+                    <div class="player-name-form mb-4">
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" id="player1Name" placeholder="Player 1 Name (X)">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="player2Name" placeholder="Player 2 Name (O)">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary me-2" onclick="startGameWithNames('friend')">Play with a Friend</button>
+                    <button class="btn btn-success" onclick="startGameWithNames('bot')">Play with Bot</button>
                 </div>
 
                 <!-- Game Board -->
                 <div id="game-board" class="d-none">
                     <div class="status-bar mb-3">
-                        <h4 id="status" class="mb-2">Giliran: X</h4>
+                        <h4 id="status" class="mb-2">Turn: X</h4>
                         <div id="player-info" class="mb-3">
                             <span id="player1" class="badge bg-primary me-2">Player 1: X</span>
                             <span id="player2" class="badge bg-secondary">Player 2: O</span>
@@ -67,8 +93,8 @@
                     </div>
 
                     <div class="mt-4">
-                        <button class="btn btn-warning" onclick="resetGame()">Main Lagi</button>
-                        <button class="btn btn-danger ms-2" onclick="changeMode()">Ganti Mode</button>
+                        <button class="btn btn-warning" onclick="resetGame()">Play Again</button>
+                        <button class="btn btn-danger ms-2" onclick="changeMode()">Change Mode</button>
                     </div>
                 </div>
             </div>

@@ -16,8 +16,8 @@
     </style>
 </head>
 <body class="bg-dark">
-    <!-- Tombol Kembali -->
-    <a href="../../games.html" class="btn btn-secondary back-button">Kembali ke Daftar Game</a>
+    <!-- Back Button -->
+    <a href="../../games.html" class="btn btn-secondary back-button">Back to Games List</a>
     
     <!-- Game Background -->
     <div class="game-background">
@@ -31,30 +31,47 @@
             <div class="col-md-8 text-center">
                 <h1 class="text-light mb-4">Checkers</h1>
                 
+                <!-- Game Cover -->
+                <div id="game-cover" class="mb-4">
+                    <img src="../../assets/images/game/checkers.png" alt="Checkers Game" class="img-fluid rounded game-cover-img mb-4">
+                    <div class="rules-container bg-light p-3 rounded text-start mb-4">
+                        <h4 class="text-center">How to Play Checkers</h4>
+                        <ul>
+                            <li>The game is played on an 8x8 board of black and white squares.</li>
+                            <li>Each player starts with 12 pieces on their side of the board.</li>
+                            <li>Pieces can only move diagonally forward on black squares.</li>
+                            <li>Pieces can jump over opponent's pieces if there's an empty space behind them.</li>
+                            <li>When a piece reaches the furthest row, it becomes a "King" and can move forward or backward.</li>
+                            <li>The game ends when one player loses all their pieces.</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-primary" onclick="showModeSelection()">Start Playing</button>
+                </div>
+                
                 <!-- Mode Selection -->
-                <div id="mode-selection" class="mb-4">
-                    <h3 class="text-light mb-3">Pilih Mode Permainan</h3>
-                    <button class="btn btn-primary me-2" onclick="showPlayerForm('friend')">Bermain dengan Teman</button>
-                    <button class="btn btn-success" onclick="showPlayerForm('bot')">Bermain dengan Bot</button>
+                <div id="mode-selection" class="mb-4 d-none">
+                    <h3 class="text-light mb-3">Select Game Mode</h3>
+                    <button class="btn btn-primary me-2" onclick="showPlayerForm('friend')">Play with a Friend</button>
+                    <button class="btn btn-success" onclick="showPlayerForm('bot')">Play with Bot</button>
                 </div>
 
                 <!-- Player Name Form -->
                 <div id="player-form" class="mb-4 d-none">
                     <div id="friend-mode-form">
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="player1Name" placeholder="Nama Pemain 1">
+                            <input type="text" class="form-control" id="player1Name" placeholder="Player 1 Name">
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="player2Name" placeholder="Nama Pemain 2">
+                            <input type="text" class="form-control" id="player2Name" placeholder="Player 2 Name">
                         </div>
                     </div>
                     <div id="bot-mode-form" class="d-none">
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="playerName" placeholder="Nama Pemain">
+                            <input type="text" class="form-control" id="playerName" placeholder="Player Name">
                         </div>
                     </div>
-                    <button class="btn btn-primary me-2" onclick="startGame()">Mulai Permainan</button>
-                    <button class="btn btn-secondary" onclick="backToModeSelection()">Kembali</button>
+                    <button class="btn btn-primary me-2" onclick="startGame()">Start Game</button>
+                    <button class="btn btn-secondary" onclick="backToModeSelection()">Back</button>
                 </div>
 
                 <!-- Game Board Container -->
@@ -62,13 +79,13 @@
                     <div class="game-info mb-3">
                         <div class="score-container">
                             <div class="player1-info text-light">
-                                <span id="player1Display">Pemain 1</span>: <span id="player1Score">0</span> poin
+                                <span id="player1Display">Player 1</span>: <span id="player1Score">0</span> points
                             </div>
                             <div class="player2-info text-light">
-                                <span id="player2Display">Pemain 2</span>: <span id="player2Score">0</span> poin
+                                <span id="player2Display">Player 2</span>: <span id="player2Score">0</span> points
                             </div>
                         </div>
-                        <div id="turnInfo" class="text-light mt-2">Giliran: <span id="currentPlayer">Pemain 1</span></div>
+                        <div id="turnInfo" class="text-light mt-2">Turn: <span id="currentPlayer">Player 1</span></div>
                     </div>
                     
                     <div class="board-container">
@@ -76,14 +93,14 @@
                     </div>
 
                     <div class="controls mt-3">
-                        <button id="resetButton" class="btn btn-warning" onclick="resetGame()">Main Lagi</button>
+                        <button id="resetButton" class="btn btn-warning" onclick="resetGame()">Play Again</button>
                     </div>
 
                     <div class="game-instructions text-light mt-4">
-                        <h4>Cara Bermain:</h4>
-                        <p>1. Klik bidak untuk memilih</p>
-                        <p>2. Klik kotak hijau untuk melakukan gerakan</p>
-                        <p>3. Lompati bidak lawan untuk mendapatkan poin</p>
+                        <h4>How to Play:</h4>
+                        <p>1. Click on a piece to select it</p>
+                        <p>2. Click on a green square to make a move</p>
+                        <p>3. Jump over opponent's pieces to earn points</p>
                     </div>
                 </div>
             </div>

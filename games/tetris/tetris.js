@@ -4,6 +4,17 @@ const ROWS = 20;
 const BLOCK_SIZE = 30;
 const COLORS = ['#FF0D72', '#0DC2FF', '#0DFF72', '#F538FF', '#FF8E0D', '#FFE138', '#3877FF'];
 
+// Player name
+let playerName = "Player";
+
+// Function to start game from cover screen
+function startTetrisGame() {
+    playerName = document.getElementById('playerName').value || "Player";
+    document.getElementById('currentPlayerName').textContent = playerName;
+    document.getElementById('game-cover').classList.add('d-none');
+    document.getElementById('game-content').classList.remove('d-none');
+}
+
 // Tetromino shapes
 const SHAPES = [
     [[1, 1, 1, 1]], // I

@@ -55,6 +55,29 @@ body {
     z-index: 20;
 }
 
+.game-cover-img {
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+    border: 3px solid #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.rules-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.rules-container ul {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.player-name-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
 .game-grid {
     max-width: 400px;
     margin: 0 auto;

@@ -16,8 +16,8 @@
     </style>
 </head>
 <body class="bg-dark">
-    <!-- Tombol Kembali -->
-    <a href="../../games.html" class="btn btn-secondary back-button">Kembali ke Daftar Game</a>
+    <!-- Back Button -->
+    <a href="../../games.html" class="btn btn-secondary back-button">Back to Games List</a>
     
     <!-- Game Background -->
     <div class="game-background">
@@ -30,29 +30,59 @@
         <div class="row justify-content-center">
             <div class="col-md-8 text-center">
                 <h1 class="text-light mb-4">Tetris</h1>
-                <div class="game-container">
-                    <canvas id="gameCanvas" width="300" height="600"></canvas>
-                    <div class="game-info">
-                        <div class="score text-light">Score: <span id="score">0</span></div>
-                        <div class="level text-light">Level: <span id="level">1</span></div>
-                        <div class="next-piece">
-                            <h5 class="text-light">Next Piece:</h5>
-                            <canvas id="nextPieceCanvas" width="100" height="100"></canvas>
-                        </div>
-                        <button id="startButton" class="btn btn-success mt-3">Mulai Game</button>
-                        <button id="pauseButton" class="btn btn-warning mt-2 d-none">Pause</button>
+                
+                <!-- Game Cover -->
+                <div id="game-cover" class="mb-4">
+                    <img src="../../assets/images/game/tetris.png" alt="Tetris Game" class="img-fluid rounded game-cover-img mb-4">
+                    <div class="rules-container bg-light p-3 rounded text-start mb-4">
+                        <h4 class="text-center">How to Play Tetris</h4>
+                        <ul>
+                            <li>Tetris is a game about stacking falling blocks.</li>
+                            <li>The goal is to fill complete horizontal rows which will then disappear and give you points.</li>
+                            <li>Use arrow keys ← → to move blocks left and right.</li>
+                            <li>Use the up arrow key ↑ to rotate blocks.</li>
+                            <li>Use the down arrow key ↓ to speed up block descent.</li>
+                            <li>Use the space bar to drop blocks instantly to the bottom.</li>
+                            <li>The game ends when blocks reach the top of the screen.</li>
+                        </ul>
                     </div>
-                    <div id="gameOver" class="game-over d-none">
-                        <h2 class="text-danger">Game Over!</h2>
-                        <button id="restartButton" class="btn btn-primary mt-2">Main Lagi</button>
+                    <div class="player-name-form mb-4">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="playerName" placeholder="Enter Your Name">
+                        </div>
+                        <button class="btn btn-primary" onclick="startTetrisGame()">Start Playing</button>
                     </div>
                 </div>
-                <div class="controls-info text-light mt-4">
-                    <h4>Kontrol:</h4>
-                    <p>← → : Gerak Kiri/Kanan</p>
-                    <p>↑ : Putar</p>
-                    <p>↓ : Turun Cepat</p>
-                    <p>Spasi : Drop Langsung</p>
+                
+                <!-- Game Content -->
+                <div id="game-content" class="d-none">
+                    <div class="player-display mb-3 text-light">
+                        <h4>Player: <span id="currentPlayerName">Player</span></h4>
+                    </div>
+                    <div class="game-container">
+                        <canvas id="gameCanvas" width="300" height="600"></canvas>
+                        <div class="game-info">
+                            <div class="score text-light">Score: <span id="score">0</span></div>
+                            <div class="level text-light">Level: <span id="level">1</span></div>
+                            <div class="next-piece">
+                                <h5 class="text-light">Next Piece:</h5>
+                                <canvas id="nextPieceCanvas" width="100" height="100"></canvas>
+                            </div>
+                            <button id="startButton" class="btn btn-success mt-3">Start Game</button>
+                            <button id="pauseButton" class="btn btn-warning mt-2 d-none">Pause</button>
+                        </div>
+                        <div id="gameOver" class="game-over d-none">
+                            <h2 class="text-danger">Game Over!</h2>
+                            <button id="restartButton" class="btn btn-primary mt-2">Play Again</button>
+                        </div>
+                    </div>
+                    <div class="controls-info text-light mt-4">
+                        <h4>Controls:</h4>
+                        <p>← → : Move Left/Right</p>
+                        <p>↑ : Rotate</p>
+                        <p>↓ : Fast Drop</p>
+                        <p>Space : Instant Drop</p>
+                    </div>
                 </div>
             </div>
         </div>
