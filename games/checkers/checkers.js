@@ -1,285 +1,438 @@
-let gameState = {
-    board: [],
-    currentPlayer: 1,
-    selectedPiece: null,
-    validMoves: [],
-    gameMode: null,
-    player1Name: '',
-    player2Name: '',
-    player1Score: 0,
-    player2Score: 0,
-    isGameOver: false
-};
+// Theme Toggle Functionality
+const toggleSwitch = document.querySelector('#checkbox');
+const currentTheme = localStorage.getItem('theme');
 
-// Function to show mode selection after clicking start button from cover
+// Check for saved theme preference
+if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        if (toggleSwitch) toggleSwitch.checked = true;
+    }
+}
+
+// Handle theme switch
+if (toggleSwitch) {
+    toggleSwitch.addEventListener('change', function(e) {
+        if (e.target.checked) {
+            document.body.classList.add('dark-theme');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.body.classList.remove('dark-theme');
+            localStorage.setItem('theme', 'light');
+        }
+    });
+}
+
+// Game variables
+let gameMode = '';
+let board = [];
+let selectedPiece = null;
+let validMoves = [];
+let currentPlayer = 'player1';
+let player1Name = 'Player 1';
+let player2Name = 'Player 2';
+let player1Score = 0;
+let player2Score = 0;
+let botLevel = 1;
+
+// Game sections
+const gameCover = document.getElementById('game-cover');
+const modeSelection = document.getElementById('mode-selection');
+const playerForm = document.getElementById('player-form');
+const friendModeForm = document.getElementById('friend-mode-form');
+const botModeForm = document.getElementById('bot-mode-form');
+const gameContainer = document.getElementById('game-container');
+
+// Show mode selection screen
 function showModeSelection() {
-    document.getElementById('game-cover').classList.add('d-none');
-    document.getElementById('mode-selection').classList.remove('d-none');
+    gameCover.classList.add('d-none');
+    modeSelection.classList.remove('d-none');
 }
 
-function initializeBoard() {
-    gameState.board = Array(8).fill().map(() => Array(8).fill(null));
-    
-    // Place player 1 pieces
-    for (let row = 0; row < 3; row++) {
-        for (let col = 0; col < 8; col++) {
-            if ((row + col) % 2 === 1) {
-                gameState.board[row][col] = { player: 1, isKing: false };
-            }
-        }
-    }
-    
-    // Place player 2 pieces
-    for (let row = 5; row < 8; row++) {
-        for (let col = 0; col < 8; col++) {
-            if ((row + col) % 2 === 1) {
-                gameState.board[row][col] = { player: 2, isKing: false };
-            }
-        }
-    }
-}
-
+// Show player form based on selected mode
 function showPlayerForm(mode) {
-    gameState.gameMode = mode;
-    document.getElementById('mode-selection').classList.add('d-none');
-    document.getElementById('player-form').classList.remove('d-none');
+    gameMode = mode;
+    modeSelection.classList.add('d-none');
+    playerForm.classList.remove('d-none');
     
     if (mode === 'friend') {
-        document.getElementById('friend-mode-form').classList.remove('d-none');
-        document.getElementById('bot-mode-form').classList.add('d-none');
+        friendModeForm.classList.remove('d-none');
+        botModeForm.classList.add('d-none');
     } else {
-        document.getElementById('friend-mode-form').classList.add('d-none');
-        document.getElementById('bot-mode-form').classList.remove('d-none');
+        friendModeForm.classList.add('d-none');
+        botModeForm.classList.remove('d-none');
     }
 }
 
+// Go back to mode selection
 function backToModeSelection() {
-    document.getElementById('player-form').classList.add('d-none');
-    document.getElementById('mode-selection').classList.remove('d-none');
-    document.getElementById('friend-mode-form').classList.remove('d-none');
-    document.getElementById('bot-mode-form').classList.add('d-none');
+    playerForm.classList.add('d-none');
+    modeSelection.classList.remove('d-none');
 }
 
+// Start the game
 function startGame() {
-    if (gameState.gameMode === 'friend') {
-        gameState.player1Name = document.getElementById('player1Name').value || 'Player 1';
-        gameState.player2Name = document.getElementById('player2Name').value || 'Player 2';
+    if (gameMode === 'friend') {
+        player1Name = document.getElementById('player1Name').value || 'Player 1';
+        player2Name = document.getElementById('player2Name').value || 'Player 2';
     } else {
-        gameState.player1Name = document.getElementById('playerName').value || 'Player';
-        gameState.player2Name = 'Bot';
+        player1Name = document.getElementById('playerName').value || 'Player';
+        player2Name = 'Bot';
     }
     
-    document.getElementById('player1Display').textContent = gameState.player1Name;
-    document.getElementById('player2Display').textContent = gameState.player2Name;
-    document.getElementById('player-form').classList.add('d-none');
-    document.getElementById('game-container').classList.remove('d-none');
+    playerForm.classList.add('d-none');
+    gameContainer.classList.remove('d-none');
     
-    initializeBoard();
-    renderBoard();
-    updateGameInfo();
+    // Update player names in the display
+    document.getElementById('player1Display').textContent = player1Name;
+    document.getElementById('player2Display').textContent = player2Name;
+    updateTurnInfo();
+    
+    // Initialize the game board
+    createBoard();
 }
 
-function renderBoard() {
-    const board = document.getElementById('board');
-    board.innerHTML = '';
+// Create the game board
+function createBoard() {
+    const boardElement = document.getElementById('board');
+    boardElement.innerHTML = '';
+    board = [];
     
     for (let row = 0; row < 8; row++) {
+        const rowArray = [];
         for (let col = 0; col < 8; col++) {
             const square = document.createElement('div');
             square.className = `square ${(row + col) % 2 === 0 ? 'white' : 'black'}`;
-            
-            if (gameState.validMoves.some(move => move.row === row && move.col === col)) {
-                square.classList.add('valid-move');
-            }
-            
-            const piece = gameState.board[row][col];
-            if (piece) {
-                const pieceDiv = document.createElement('div');
-                pieceDiv.className = `piece player${piece.player}${piece.isKing ? ' king' : ''}`;
-                if (gameState.selectedPiece && gameState.selectedPiece.row === row && gameState.selectedPiece.col === col) {
-                    pieceDiv.classList.add('selected');
-                }
-                square.appendChild(pieceDiv);
-            }
-            
+            square.dataset.row = row;
+            square.dataset.col = col;
             square.addEventListener('click', () => handleSquareClick(row, col));
-            board.appendChild(square);
+            
+            let piece = null;
+            
+            // Place initial pieces
+            if ((row + col) % 2 !== 0) {
+                if (row < 3) {
+                    piece = { player: 'player2', king: false };
+                    createPieceElement(square, 'player2');
+                } else if (row > 4) {
+                    piece = { player: 'player1', king: false };
+                    createPieceElement(square, 'player1');
+                }
+            }
+            
+            rowArray.push(piece);
+            boardElement.appendChild(square);
         }
+        board.push(rowArray);
     }
 }
 
+// Create a piece element
+function createPieceElement(square, player) {
+    const piece = document.createElement('div');
+    piece.className = `piece ${player}`;
+    square.appendChild(piece);
+}
+
+// Handle square click
 function handleSquareClick(row, col) {
-    if (gameState.isGameOver) return;
-    if (gameState.gameMode === 'bot' && gameState.currentPlayer === 2) return;
+    const clickedSquare = board[row][col];
     
-    const piece = gameState.board[row][col];
+    // If a piece is already selected and player clicks on a valid move
+    if (selectedPiece && validMoves.some(move => move.row === row && move.col === col)) {
+        makeMove(row, col);
+        return;
+    }
     
-    if (piece && piece.player === gameState.currentPlayer) {
-        gameState.selectedPiece = { row, col };
-        gameState.validMoves = getValidMoves(row, col);
-        renderBoard();
-    } else if (gameState.selectedPiece && gameState.validMoves.some(move => move.row === row && move.col === col)) {
-        movePiece(row, col);
-        if (gameState.gameMode === 'bot' && !gameState.isGameOver) {
-            setTimeout(makeBotMove, 500);
+    // Clear previous selection
+    clearSelection();
+    
+    // If player clicks on their own piece
+    if (clickedSquare && clickedSquare.player === currentPlayer) {
+        const pieceElement = document.querySelector(`.square[data-row="${row}"][data-col="${col}"] .piece`);
+        if (pieceElement) {
+            pieceElement.classList.add('selected');
+            selectedPiece = { row, col };
+            validMoves = getValidMoves(row, col);
+            highlightValidMoves();
         }
     }
 }
 
+// Clear selected piece and valid moves
+function clearSelection() {
+    const selected = document.querySelector('.piece.selected');
+    if (selected) {
+        selected.classList.remove('selected');
+    }
+    
+    const highlights = document.querySelectorAll('.square.valid-move');
+    highlights.forEach(square => {
+        square.classList.remove('valid-move');
+    });
+    
+    selectedPiece = null;
+    validMoves = [];
+}
+
+// Highlight valid moves
+function highlightValidMoves() {
+    validMoves.forEach(move => {
+        const square = document.querySelector(`.square[data-row="${move.row}"][data-col="${move.col}"]`);
+        if (square) {
+            square.classList.add('valid-move');
+        }
+    });
+}
+
+// Get valid moves for a piece
 function getValidMoves(row, col) {
-    const piece = gameState.board[row][col];
+    const piece = board[row][col];
     const moves = [];
     
     if (!piece) return moves;
     
-    const directions = piece.isKing ? [-1, 1] : piece.player === 1 ? [1] : [-1];
+    const directions = [];
+    if (piece.player === 'player1' || piece.king) {
+        // Player 1 or King: Move up-left and up-right
+        directions.push({ rowDir: -1, colDir: -1 });
+        directions.push({ rowDir: -1, colDir: 1 });
+    }
     
-    for (const rowDir of directions) {
-        for (const colDir of [-1, 1]) {
-            // Normal movement
-            const newRow = row + rowDir;
-            const newCol = col + colDir;
+    if (piece.player === 'player2' || piece.king) {
+        // Player 2 or King: Move down-left and down-right
+        directions.push({ rowDir: 1, colDir: -1 });
+        directions.push({ rowDir: 1, colDir: 1 });
+    }
+    
+    // Check for jumps first (required in checkers)
+    const jumps = [];
+    
+    for (const dir of directions) {
+        const newRow = row + dir.rowDir;
+        const newCol = col + dir.colDir;
+        
+        if (isInBounds(newRow, newCol) && board[newRow][newCol] && 
+            board[newRow][newCol].player !== piece.player) {
+            const jumpRow = newRow + dir.rowDir;
+            const jumpCol = newCol + dir.colDir;
             
-            if (isValidPosition(newRow, newCol) && !gameState.board[newRow][newCol]) {
-                moves.push({ row: newRow, col: newCol });
+            if (isInBounds(jumpRow, jumpCol) && !board[jumpRow][jumpCol]) {
+                jumps.push({ row: jumpRow, col: jumpCol, isJump: true, jumpedRow: newRow, jumpedCol: newCol });
             }
-            
-            // Jump movement
-            const jumpRow = row + rowDir * 2;
-            const jumpCol = col + colDir * 2;
-            
-            if (isValidPosition(jumpRow, jumpCol) && 
-                !gameState.board[jumpRow][jumpCol] && 
-                gameState.board[newRow][newCol] && 
-                gameState.board[newRow][newCol].player !== piece.player) {
-                moves.push({ row: jumpRow, col: jumpCol, isJump: true });
-            }
+        }
+    }
+    
+    // If jumps are available, return only jumps (rules say jumps are required)
+    if (jumps.length > 0) {
+        return jumps;
+    }
+    
+    // If no jumps, check for regular moves
+    for (const dir of directions) {
+        const newRow = row + dir.rowDir;
+        const newCol = col + dir.colDir;
+        
+        if (isInBounds(newRow, newCol) && !board[newRow][newCol]) {
+            moves.push({ row: newRow, col: newCol, isJump: false });
         }
     }
     
     return moves;
 }
 
-function isValidPosition(row, col) {
+// Check if coordinates are within the board
+function isInBounds(row, col) {
     return row >= 0 && row < 8 && col >= 0 && col < 8;
 }
 
-function movePiece(newRow, newCol) {
-    const { row: oldRow, col: oldCol } = gameState.selectedPiece;
-    const piece = gameState.board[oldRow][oldCol];
+// Make a move
+function makeMove(targetRow, targetCol) {
+    if (!selectedPiece) return;
     
-    // Move piece
-    gameState.board[newRow][newCol] = piece;
-    gameState.board[oldRow][oldCol] = null;
+    const { row: startRow, col: startCol } = selectedPiece;
+    const piece = board[startRow][startCol];
+    const targetSquare = document.querySelector(`.square[data-row="${targetRow}"][data-col="${targetCol}"]`);
+    const sourceSquare = document.querySelector(`.square[data-row="${startRow}"][data-col="${startCol}"]`);
+    const pieceElement = sourceSquare.querySelector('.piece');
     
-    // Check if a piece was jumped
-    if (Math.abs(newRow - oldRow) === 2) {
-        const jumpedRow = (newRow + oldRow) / 2;
-        const jumpedCol = (newCol + oldCol) / 2;
-        gameState.board[jumpedRow][jumpedCol] = null;
+    // Move the piece
+    board[targetRow][targetCol] = piece;
+    board[startRow][startCol] = null;
+    
+    // Check if piece should become king
+    if ((piece.player === 'player1' && targetRow === 0) || 
+        (piece.player === 'player2' && targetRow === 7)) {
+        piece.king = true;
+        pieceElement.classList.add('king');
+    }
+    
+    // Handle jump
+    const move = validMoves.find(move => move.row === targetRow && move.col === targetCol);
+    if (move && move.isJump) {
+        const jumpedPiece = board[move.jumpedRow][move.jumpedCol];
+        board[move.jumpedRow][move.jumpedCol] = null;
         
-        // Add points
-        if (gameState.currentPlayer === 1) {
-            gameState.player1Score++;
+        const jumpedSquare = document.querySelector(`.square[data-row="${move.jumpedRow}"][data-col="${move.jumpedCol}"]`);
+        jumpedSquare.innerHTML = '';
+        
+        // Award points for jump
+        if (currentPlayer === 'player1') {
+            player1Score++;
+            document.getElementById('player1Score').textContent = player1Score;
         } else {
-            gameState.player2Score++;
+            player2Score++;
+            document.getElementById('player2Score').textContent = player2Score;
         }
     }
     
-    // Check for king
-    if ((piece.player === 1 && newRow === 7) || (piece.player === 2 && newRow === 0)) {
-        piece.isKing = true;
+    // Move the DOM element
+    if (pieceElement) {
+        targetSquare.appendChild(pieceElement);
     }
     
-    // Switch turns
-    gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
-    gameState.selectedPiece = null;
-    gameState.validMoves = [];
+    // Clear selection
+    clearSelection();
     
-    checkGameOver();
-    updateGameInfo();
-    renderBoard();
+    // Check for win
+    if (checkForWin()) {
+        const winner = currentPlayer === 'player1' ? player1Name : player2Name;
+        setTimeout(() => {
+            alert(`${winner} wins!`);
+        }, 100);
+        return;
+    }
+    
+    // Switch player
+    switchPlayer();
+    
+    // Bot's turn
+    if (gameMode === 'bot' && currentPlayer === 'player2') {
+        setTimeout(botMove, 1000);
+    }
 }
 
-function updateGameInfo() {
-    document.getElementById('currentPlayer').textContent = 
-        gameState.currentPlayer === 1 ? gameState.player1Name : gameState.player2Name;
-    document.getElementById('player1Score').textContent = gameState.player1Score;
-    document.getElementById('player2Score').textContent = gameState.player2Score;
+// Switch players
+function switchPlayer() {
+    currentPlayer = currentPlayer === 'player1' ? 'player2' : 'player1';
+    updateTurnInfo();
 }
 
-function checkGameOver() {
-    let player1Pieces = 0;
-    let player2Pieces = 0;
-    
+// Update the turn information display
+function updateTurnInfo() {
+    const playerName = currentPlayer === 'player1' ? player1Name : player2Name;
+    document.getElementById('currentPlayer').textContent = playerName;
+}
+
+// Bot move logic
+function botMove() {
+    // Find all pieces that can move
+    const botPieces = [];
     for (let row = 0; row < 8; row++) {
         for (let col = 0; col < 8; col++) {
-            const piece = gameState.board[row][col];
-            if (piece) {
-                if (piece.player === 1) player1Pieces++;
-                else player2Pieces++;
+            const piece = board[row][col];
+            if (piece && piece.player === 'player2') {
+                const moves = getValidMoves(row, col);
+                if (moves.length > 0) {
+                    botPieces.push({ row, col, moves });
+                }
             }
         }
     }
     
-    if (player1Pieces === 0 || player2Pieces === 0) {
-        gameState.isGameOver = true;
-        const winner = player1Pieces > 0 ? gameState.player1Name : gameState.player2Name;
-        alert(`Game Over! ${winner} wins!`);
+    if (botPieces.length === 0) {
+        // Bot has no moves, player wins
+        alert(`${player1Name} wins! ${player2Name} has no moves left.`);
+        return;
+    }
+    
+    // Find pieces that can jump
+    const jumpingPieces = botPieces.filter(p => p.moves.some(m => m.isJump));
+    
+    // Prioritize jumps
+    const piecesToConsider = jumpingPieces.length > 0 ? jumpingPieces : botPieces;
+    
+    // Choose a random piece and move
+    const randomPieceIndex = Math.floor(Math.random() * piecesToConsider.length);
+    const chosenPiece = piecesToConsider[randomPieceIndex];
+    
+    // Choose a move (prioritize king-making moves, then jumps)
+    let chosenMove;
+    
+    // Look for king-making moves
+    const kingMoves = chosenPiece.moves.filter(move => move.row === 7);
+    if (kingMoves.length > 0) {
+        chosenMove = kingMoves[0];
+    } 
+    // Otherwise, choose a jump if available
+    else if (chosenPiece.moves.some(m => m.isJump)) {
+        chosenMove = chosenPiece.moves.find(m => m.isJump);
+    } 
+    // Or just a random move
+    else {
+        const randomMoveIndex = Math.floor(Math.random() * chosenPiece.moves.length);
+        chosenMove = chosenPiece.moves[randomMoveIndex];
+    }
+    
+    // Simulate clicking on the piece and then the target
+    const pieceElement = document.querySelector(`.square[data-row="${chosenPiece.row}"][data-col="${chosenPiece.col}"] .piece`);
+    if (pieceElement) {
+        // Select the piece
+        handleSquareClick(chosenPiece.row, chosenPiece.col);
+        
+        // Make the move
+        setTimeout(() => {
+            makeMove(chosenMove.row, chosenMove.col);
+        }, 500);
     }
 }
 
-function makeBotMove() {
-    let bestMove = null;
-    let bestPiece = null;
-    let maxScore = -Infinity;
+// Check for win
+function checkForWin() {
+    let player1Pieces = 0;
+    let player2Pieces = 0;
+    let player1CanMove = false;
+    let player2CanMove = false;
     
-    // Find all bot pieces
     for (let row = 0; row < 8; row++) {
         for (let col = 0; col < 8; col++) {
-            const piece = gameState.board[row][col];
-            if (piece && piece.player === 2) {
-                const moves = getValidMoves(row, col);
-                for (const move of moves) {
-                    let score = Math.random() * 10; // Random factor for variation
-                    
-                    // Prioritize jump moves
-                    if (move.isJump) score += 20;
-                    
-                    // Prioritize becoming king
-                    if (move.row === 0) score += 15;
-                    
-                    if (score > maxScore) {
-                        maxScore = score;
-                        bestMove = move;
-                        bestPiece = { row, col };
+            const piece = board[row][col];
+            if (piece) {
+                if (piece.player === 'player1') {
+                    player1Pieces++;
+                    if (!player1CanMove && getValidMoves(row, col).length > 0) {
+                        player1CanMove = true;
+                    }
+                } else {
+                    player2Pieces++;
+                    if (!player2CanMove && getValidMoves(row, col).length > 0) {
+                        player2CanMove = true;
                     }
                 }
             }
         }
     }
     
-    if (bestMove && bestPiece) {
-        gameState.selectedPiece = bestPiece;
-        gameState.validMoves = getValidMoves(bestPiece.row, bestPiece.col);
-        renderBoard();
-        setTimeout(() => movePiece(bestMove.row, bestMove.col), 500);
-    }
+    // Win by capturing all pieces
+    if (player1Pieces === 0) return true;
+    if (player2Pieces === 0) return true;
+    
+    // Win by blocking all moves
+    if (currentPlayer === 'player1' && !player1CanMove) return true;
+    if (currentPlayer === 'player2' && !player2CanMove) return true;
+    
+    return false;
 }
 
+// Reset game
 function resetGame() {
-    gameState = {
-        ...gameState,
-        board: [],
-        currentPlayer: 1,
-        selectedPiece: null,
-        validMoves: [],
-        player1Score: 0,
-        player2Score: 0,
-        isGameOver: false
-    };
-    
-    initializeBoard();
-    renderBoard();
-    updateGameInfo();
+    player1Score = 0;
+    player2Score = 0;
+    document.getElementById('player1Score').textContent = '0';
+    document.getElementById('player2Score').textContent = '0';
+    currentPlayer = 'player1';
+    updateTurnInfo();
+    createBoard();
 }

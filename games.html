@@ -48,6 +48,13 @@
 
     <!-- Game Background -->
     <div class="game-background">
+        <!-- Sky Elements -->
+        <div class="sky-elements">
+            <div class="sun"></div>
+            <div class="moon"></div>
+            <div class="stars"></div>
+        </div>
+        
         <!-- Clouds -->
         <div class="game-scene">
             <img src="assets/images/cloud.png" class="cloud1 scroll-element" alt="Cloud">
@@ -83,18 +90,24 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
+                            <a class="nav-link" href="index.html">HOME</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="games.html">Games</a>
+                            <a class="nav-link active" href="games.html">GAMES</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                            <a class="nav-link" href="about.html">ABOUT US</a>
                         </li>
                     </ul>
+                    <div class="theme-switch-wrapper ms-3">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox" />
+                            <div class="slider round">
+                                <i class="fas fa-sun"></i>
+                                <i class="fas fa-moon"></i>
+                            </div>
+                        </label>
+                    </div>
                 </div>
             </div>
         </nav>
