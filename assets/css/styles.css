@@ -128,7 +128,7 @@ input:checked + .slider .fa-moon {
     left: 0;
     width: 100%;
     height: 100vh;
-    z-index: 0;
+    z-index: -2;
     overflow: hidden;
 }
 
@@ -138,7 +138,7 @@ input:checked + .slider .fa-moon {
     height: 80px;
     background: #ffeb3b;
     border-radius: 50%;
-    top: 50px;
+    top: 120px;
     right: 80px;
     box-shadow: 0 0 40px rgba(255, 235, 59, 0.8);
     transition: all 0.5s ease;
@@ -151,7 +151,7 @@ input:checked + .slider .fa-moon {
     height: 70px;
     background: #ecf0f1;
     border-radius: 50%;
-    top: 50px;
+    top: 120px;
     right: 80px;
     box-shadow: 0 0 20px rgba(236, 240, 241, 0.8);
     transition: all 0.5s ease;
@@ -271,7 +271,7 @@ body.dark-theme .cloud3 {
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: -1;
 }
 
 .game-clouds {
@@ -295,22 +295,23 @@ body.dark-theme .cloud3 {
     position: absolute;
     width: 100px;
     animation: floatCloud linear infinite;
+    z-index: -1;
 }
 
 .cloud1 {
-    top: 50px;
+    top: 120px;
     left: 10%;
     animation-duration: 60s;
 }
 
 .cloud2 {
-    top: 30px;
+    top: 160px;
     left: 40%;
     animation-duration: 75s;
 }
 
 .cloud3 {
-    top: 80px;
+    top: 140px;
     left: 70%;
     animation-duration: 90s;
 }
