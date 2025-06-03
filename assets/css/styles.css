@@ -147,8 +147,8 @@ input:checked + .slider .fa-moon {
 
 .moon {
     position: absolute;
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     background: #ecf0f1;
     border-radius: 50%;
     top: 120px;
@@ -158,40 +158,9 @@ input:checked + .slider .fa-moon {
     opacity: 0;
 }
 
-.stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    background-image: radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 60px 110px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 80px 150px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 100px 190px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 120px 230px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 140px 270px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 160px 310px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 180px 350px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 200px 390px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 220px 30px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 240px 70px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 260px 110px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 280px 150px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 300px 190px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 320px 230px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 340px 270px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 360px 310px, #ffffff, rgba(0, 0, 0, 0)),
-                      radial-gradient(2px 2px at 380px 350px, #ffffff, rgba(0, 0, 0, 0));
-    background-repeat: repeat;
-    background-size: 400px 400px;
-}
-
 /* Dark theme adjustments */
 body.dark-theme .game-background {
-    background-color: #183055;
+    background-image: url('../images/stars.gif');
 }
 
 body.dark-theme .sun {
@@ -199,10 +168,6 @@ body.dark-theme .sun {
 }
 
 body.dark-theme .moon {
-    opacity: 1;
-}
-
-body.dark-theme .stars {
     opacity: 1;
 }
 
@@ -260,6 +225,11 @@ body.dark-theme .cloud3 {
     height: 100vh;
     z-index: -1;
     background-color: #4a9af8;
+    background-image: url('../images/bluesky.gif');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
     overflow: hidden;
     transition: background-color 0.4s ease;
 }
@@ -761,90 +731,134 @@ body.dark-theme .cloud3 {
     transform: scale(1.1);
 }
 
-/* About page styles */
+/* About Hero Section Styles */
 .about-hero {
     padding: 80px 0;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(240, 248, 255, 0.8);
     border-radius: 10px;
-    margin-bottom: 50px;
 }
 
-.about-story, .about-team {
-    padding: 40px 0;
-    background-color: rgba(255, 255, 255, 0.9);
-    color: #333;
-    border-radius: 10px;
-    margin-bottom: 50px;
+.about-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
 }
 
-body.dark-theme .about-story, 
-body.dark-theme .about-team {
-    background-color: rgba(30, 30, 30, 0.9);
+.about-title span {
+    color: #89bf10;
+}
+
+body.dark-theme .about-hero {
+    background-color: rgba(30, 30, 30, 0.8);
     color: #f0f0f0;
 }
 
-.section-title {
-    position: relative;
+/* Team Section Styles */
+.team-section {
+    background-color: transparent;
+    padding: 60px 0;
+    margin-top: 50px;
+}
+
+.team-title {
+    color: #333;
+    margin-bottom: 40px;
+    text-align: center;
+    font-weight: 600;
+}
+
+body.dark-theme .team-title {
+    color: #f0f0f0;
+}
+
+.team .card {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 0;
     margin-bottom: 30px;
-    font-weight: bold;
-    color: #333;
-}
-
-body.dark-theme .section-title {
-    color: #f0f0f0;
-}
-
-.about-image-container {
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-}
-
-.team-member {
-    background-color: white;
-    border-radius: 10px;
+    text-align: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 30px;
-    transition: transform 0.3s;
+    border: none;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    aspect-ratio: 1/1;
 }
 
-body.dark-theme .team-member {
-    background-color: #2c2c2c;
-    color: #f0f0f0;
+body.dark-theme {
+    background-color: rgba(30, 30, 30, 0.8);
 }
 
-.team-member:hover {
-    transform: translateY(-10px);
-}
-
-.member-image {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 20px;
+.team .team-img-container {
+    width: 100%;
+    aspect-ratio: 1/1;
+    position: relative;
     overflow: hidden;
-    border: 5px solid #f0f0f0;
+    border-radius: 10px 10px 0 0;
+    margin: 0;
 }
 
-.member-image img {
+.team .team-img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 0;
+}
+
+.team-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.member-info h4 {
+.team-name {
     font-size: 1.2rem;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 5px;
+    color: #333;
 }
 
-.position {
-    color: #4a9af8;
-    font-size: 0.9rem;
-    font-weight: 500;
+body.dark-theme .team-name {
+    color: #f0f0f0;
+}
+
+.team-position {
+    color: #666;
     margin-bottom: 15px;
 }
 
-body.dark-theme .position {
-    color: #64b5f6;
+body.dark-theme .team-position {
+    color: #aaa;
+}
+
+.team-social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.team-social a {
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.team-social a:hover {
+    background-color: #4a9af8;
+    color: white;
+}
+
+body.dark-theme .team-social a {
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+}
+
+body.dark-theme .team-social a:hover {
+    background-color: #4a9af8;
 }
