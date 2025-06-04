@@ -60,26 +60,42 @@
                     <div class="rules-container bg-light p-3 rounded text-start mb-4">
                         <h4 class="text-center">How to Play Flappy Bird</h4>
                         <ul>
-                            <li>Click to make the bird fly upward</li>
+                            <li>Click with your mouse or press the Spacebar key to make the bird fly upward</li>
+                            <li>Each click or press makes the bird flap its wings and gain height</li>
                             <li>Navigate through the pipes without hitting them</li>
                             <li>Each pipe you pass earns you 1 point</li>
                             <li>The game ends if the bird hits a pipe or the ground</li>
                         </ul>
                     </div>
-                    <button class="btn btn-primary" onclick="startGame()">Start Playing</button>
+                    <div class="mb-3">
+                        <label for="playerName" class="form-label">Enter Your Name:</label>
+                        <input type="text" class="form-control" id="playerName" placeholder="Player">
+                    </div>
+                    <button class="btn btn-primary" onclick="startFlappyBirdGame()">Start Playing</button>
                 </div>
                 
-                <!-- Game Canvas -->
-                <div id="game-container" class="d-none">
-                    <div class="score-container mb-3">
-                        <div class="text-light">Score: <span id="score">0</span></div>
-                        <div class="text-light">High Score: <span id="highScore">0</span></div>
+                <!-- Game Content -->
+                <div id="game-content" class="d-none">
+                    <h3 class="text-light mb-3">Player: <span id="currentPlayerName">Player</span></h3>
+                    
+                    <!-- Game Canvas -->
+                    <div id="game-container">
+                        <div class="score-container mb-3">
+                            <div class="text-light">Score: <span id="score">0</span></div>
+                            <div class="text-light">High Score: <span id="highScore">0</span></div>
+                        </div>
+                        
+                        <canvas id="gameCanvas" width="800" height="640"></canvas>
+                        
+                        <div id="gameOver" class="game-over d-none">
+                            <h2 class="text-light">Game Over!</h2>
+                            <p class="text-light">Your Score: <span id="finalScore">0</span></p>
+                            <button id="restartButton" class="btn btn-warning" onclick="restartGame()">Play Again</button>
+                        </div>
                     </div>
                     
-                    <canvas id="gameCanvas" width="320" height="480"></canvas>
-                    
                     <div class="controls mt-3">
-                        <button id="restartButton" class="btn btn-warning d-none" onclick="restartGame()">Play Again</button>
+                        <button id="startButton" class="btn btn-success">Start Game</button>
                     </div>
                 </div>
             </div>

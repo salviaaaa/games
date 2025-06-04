@@ -54,9 +54,9 @@ const bird = {
     y: canvas.height / 2,
     width: 34,
     height: 24,
-    gravity: 0.5,
+    gravity: 0.20,
     velocity: 0,
-    jump: -8
+    jump: -6
 };
 
 // Pipe properties
@@ -64,11 +64,13 @@ const pipeWidth = 50;
 const pipeGap = 150;
 const pipes = [];
 let pipeSpawnTimer = 0;
-const pipeSpawnInterval = 90;
+let pipeSpawnInterval = 120; // Lebih lambat di awal (interval lebih besar)
+let pipeSpeed = 1.0; // Kecepatan awal pipa
 
 // Score
 let score = 0;
 let highScore = localStorage.getItem('flappyHighScore') || 0;
+let firstPipeCreated = false; // Untuk mengontrol pembuatan pipa pertama
 
 // Game controls
 const startButton = document.getElementById('startButton');
@@ -98,16 +100,23 @@ function startGame() {
     startButton.style.display = 'none';
     gameOverScreen.classList.add('d-none');
     resetGame();
+    // Buat pipa pertama lebih dekat saat game dimulai
+    pipeSpawnTimer = pipeSpawnInterval - 60;
     animate();
 }
 
 function resetGame() {
     bird.y = canvas.height / 2;
     bird.velocity = 0;
+    bird.gravity = 0.20;
+    bird.jump = -6;
     pipes.length = 0;
     score = 0;
     scoreElement.textContent = score;
     highScoreElement.textContent = highScore;
+    pipeSpawnInterval = 120; // Reset ke interval awal yang lebih lambat
+    pipeSpeed = 1.0; // Reset ke kecepatan awal
+    firstPipeCreated = false; // Reset status pipa pertama
 }
 
 function restartGame() {
@@ -153,11 +162,17 @@ function animate() {
     if (pipeSpawnTimer >= pipeSpawnInterval) {
         createPipe();
         pipeSpawnTimer = 0;
+        
+        // Setelah pipa pertama dibuat, kurangi interval spawn untuk pipa berikutnya
+        if (!firstPipeCreated) {
+            firstPipeCreated = true;
+            pipeSpawnInterval = 90; // Interval normal setelah pipa pertama
+        }
     }
 
     for (let i = pipes.length - 1; i >= 0; i--) {
         const pipe = pipes[i];
-        pipe.x -= 2;
+        pipe.x -= pipeSpeed;
 
         // Draw pipe using image
         if (i % 2 === 0) {
@@ -186,6 +201,13 @@ function animate() {
             pipe.passed = true;
             score++;
             scoreElement.textContent = score;
+            
+            // Tingkatkan kesulitan seiring bertambahnya skor
+            if (score % 5 === 0 && pipeSpawnInterval > 60) {
+                pipeSpawnInterval -= 5; // Kurangi interval spawn
+                pipeSpeed += 0.1; // Tingkatkan kecepatan pipa
+            }
+            
             if (score > highScore) {
                 highScore = score;
                 localStorage.setItem('flappyHighScore', highScore);
@@ -206,6 +228,7 @@ function animate() {
 
     // Game over
     if (gameOver) {
+        document.getElementById('finalScore').textContent = score;
         gameOverScreen.classList.remove('d-none');
         return;
     }
