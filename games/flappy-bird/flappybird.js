@@ -40,6 +40,10 @@ birdImg.src = '../../assets/images/game/flappybird.gif';
 const pipeImg = new Image();
 pipeImg.src = '../../assets/images/greenpipes.png';
 
+// Background image
+const bgImg = new Image();
+bgImg.src = '../../assets/images/game/backgroundflappy.gif';
+
 // Function to start game from cover screen
 function startFlappyBirdGame() {
     playerName = document.getElementById('playerName').value || "Player";
@@ -102,6 +106,10 @@ function startGame() {
     resetGame();
     // Buat pipa pertama lebih dekat saat game dimulai
     pipeSpawnTimer = pipeSpawnInterval - 30;
+    // Apply background image to canvas
+    canvas.style.backgroundImage = `url('../../assets/images/game/backgroundflappy.gif')`;
+    canvas.style.backgroundSize = 'cover';
+    canvas.style.backgroundPosition = 'center';
     // Start animation if not already running
     if (!window.animationFrameId) {
         animate();
@@ -121,6 +129,10 @@ function resetGame() {
     pipeSpeed = 1.0; // Reset ke kecepatan awal yang lebih lambat
     pipeGap = 180; // Reset ke gap yang lebih besar
     firstPipeCreated = false; // Reset status pipa pertama
+    // Pastikan background tetap ada saat game di-reset
+    canvas.style.backgroundImage = `url('../../assets/images/game/backgroundflappy.gif')`;
+    canvas.style.backgroundSize = 'cover';
+    canvas.style.backgroundPosition = 'center';
 }
 
 function restartGame() {
@@ -162,12 +174,23 @@ function createPipe() {
 // Initialize the game by drawing the bird
 function initGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Apply background image to canvas when game initializes
+    canvas.style.backgroundImage = `url('../../assets/images/game/backgroundflappy.gif')`;
+    canvas.style.backgroundSize = 'cover';
+    canvas.style.backgroundPosition = 'center';
     ctx.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 }
 
 function animate() {
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Pastikan background image selalu ada, tidak hanya saat game dimulai
+    if (!canvas.style.backgroundImage) {
+        canvas.style.backgroundImage = `url('../../assets/images/game/backgroundflappy.gif')`;
+        canvas.style.backgroundSize = 'cover';
+        canvas.style.backgroundPosition = 'center';
+    }
 
     if (gameStarted && !gameOver) {
         // Update bird position only when game is started
@@ -202,19 +225,13 @@ function animate() {
             ctx.scale(1, -1);
             ctx.drawImage(pipeImg, pipe.x, -pipe.y - pipe.height, pipe.width, pipe.height);
             
-            // Add outline to make pipes more visible
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = '#005000';
-            ctx.strokeRect(pipe.x, -pipe.y - pipe.height, pipe.width, pipe.height);
+            // Remove outline to make pipes look cleaner
             ctx.restore();
         } else {
             // Bottom pipe
             ctx.drawImage(pipeImg, pipe.x, pipe.y, pipe.width, pipe.height);
             
-            // Add outline to make pipes more visible
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = '#005000';
-            ctx.strokeRect(pipe.x, pipe.y, pipe.width, pipe.height);
+            // Remove outline to make pipes look cleaner
         }
 
         // Check collision
