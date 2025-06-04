@@ -54,18 +54,18 @@ const bird = {
     y: canvas.height / 2,
     width: 34,
     height: 24,
-    gravity: 0.20,
+    gravity: 0.30,
     velocity: 0,
-    jump: -6
+    jump: -7.5
 };
 
 // Pipe properties
 const pipeWidth = 50;
-const pipeGap = 150;
 const pipes = [];
 let pipeSpawnTimer = 0;
-let pipeSpawnInterval = 120; // Lebih lambat di awal (interval lebih besar)
+let pipeSpawnInterval = 90; // Interval awal yang lebih cepat agar pipe muncul lebih dekat
 let pipeSpeed = 1.0; // Kecepatan awal pipa
+let pipeGap = 180; // Gap yang lebih besar untuk memudahkan pemain baru
 
 // Score
 let score = 0;
@@ -101,21 +101,25 @@ function startGame() {
     gameOverScreen.classList.add('d-none');
     resetGame();
     // Buat pipa pertama lebih dekat saat game dimulai
-    pipeSpawnTimer = pipeSpawnInterval - 60;
-    animate();
+    pipeSpawnTimer = pipeSpawnInterval - 30;
+    // Start animation if not already running
+    if (!window.animationFrameId) {
+        animate();
+    }
 }
 
 function resetGame() {
     bird.y = canvas.height / 2;
     bird.velocity = 0;
-    bird.gravity = 0.20;
-    bird.jump = -6;
+    bird.gravity = 0.30;
+    bird.jump = -7.5;
     pipes.length = 0;
     score = 0;
     scoreElement.textContent = score;
     highScoreElement.textContent = highScore;
-    pipeSpawnInterval = 120; // Reset ke interval awal yang lebih lambat
-    pipeSpeed = 1.0; // Reset ke kecepatan awal
+    pipeSpawnInterval = 90; // Reset ke interval awal yang lebih cepat
+    pipeSpeed = 1.0; // Reset ke kecepatan awal yang lebih lambat
+    pipeGap = 180; // Reset ke gap yang lebih besar
     firstPipeCreated = false; // Reset status pipa pertama
 }
 
@@ -125,7 +129,18 @@ function restartGame() {
 
 function createPipe() {
     const minHeight = 50;
-    const maxHeight = canvas.height - pipeGap - minHeight;
+    
+    // Menentukan gap berdasarkan skor
+    let currentPipeGap = pipeGap;
+    if (score <= 100) {
+        // Gap lebih besar untuk skor di bawah 100
+        currentPipeGap = 180 + (100 - score) * 0.2;
+    } else {
+        // Gap normal untuk skor di atas 100
+        currentPipeGap = 150;
+    }
+    
+    const maxHeight = canvas.height - currentPipeGap - minHeight;
     const height = Math.floor(Math.random() * (maxHeight - minHeight + 1)) + minHeight;
 
     pipes.push({
@@ -138,23 +153,29 @@ function createPipe() {
 
     pipes.push({
         x: canvas.width,
-        y: height + pipeGap,
+        y: height + currentPipeGap,
         width: pipeWidth,
-        height: canvas.height - height - pipeGap
+        height: canvas.height - height - currentPipeGap
     });
 }
 
-function animate() {
-    if (!gameStarted || gameOver) return;
+// Initialize the game by drawing the bird
+function initGame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
+}
 
+function animate() {
     // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Update bird
-    bird.velocity += bird.gravity;
-    bird.y += bird.velocity;
+    if (gameStarted && !gameOver) {
+        // Update bird position only when game is started
+        bird.velocity += bird.gravity;
+        bird.y += bird.velocity;
+    }
 
-    // Draw bird
+    // Always draw bird
     ctx.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 
     // Update and draw pipes
@@ -163,10 +184,10 @@ function animate() {
         createPipe();
         pipeSpawnTimer = 0;
         
-        // Setelah pipa pertama dibuat, kurangi interval spawn untuk pipa berikutnya
+        // Setelah pipa pertama dibuat, atur interval spawn untuk pipa berikutnya
         if (!firstPipeCreated) {
             firstPipeCreated = true;
-            pipeSpawnInterval = 90; // Interval normal setelah pipa pertama
+            pipeSpawnInterval = 120; // Interval lebih lambat setelah pipa pertama (jarak antar pipes lebih renggang)
         }
     }
 
@@ -174,16 +195,26 @@ function animate() {
         const pipe = pipes[i];
         pipe.x -= pipeSpeed;
 
-        // Draw pipe using image
+        // Draw pipe using image with enhanced visibility
         if (i % 2 === 0) {
             // Top pipe (flipped)
             ctx.save();
             ctx.scale(1, -1);
             ctx.drawImage(pipeImg, pipe.x, -pipe.y - pipe.height, pipe.width, pipe.height);
+            
+            // Add outline to make pipes more visible
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#005000';
+            ctx.strokeRect(pipe.x, -pipe.y - pipe.height, pipe.width, pipe.height);
             ctx.restore();
         } else {
             // Bottom pipe
             ctx.drawImage(pipeImg, pipe.x, pipe.y, pipe.width, pipe.height);
+            
+            // Add outline to make pipes more visible
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#005000';
+            ctx.strokeRect(pipe.x, pipe.y, pipe.width, pipe.height);
         }
 
         // Check collision
@@ -203,9 +234,16 @@ function animate() {
             scoreElement.textContent = score;
             
             // Tingkatkan kesulitan seiring bertambahnya skor
-            if (score % 5 === 0 && pipeSpawnInterval > 60) {
-                pipeSpawnInterval -= 5; // Kurangi interval spawn
-                pipeSpeed += 0.1; // Tingkatkan kecepatan pipa
+            if (score > 100 && score % 10 === 0 && pipeSpawnInterval > 70) {
+                pipeSpawnInterval -= 3; // Kurangi interval spawn lebih lambat
+                pipeSpeed += 0.05; // Tingkatkan kecepatan pipa lebih lambat
+            }
+            
+            // Sesuaikan gap pipa berdasarkan skor
+            if (score <= 100) {
+                pipeGap = 180 + (100 - score) * 0.2; // Gap lebih besar untuk skor rendah
+            } else {
+                pipeGap = 150; // Gap normal untuk skor tinggi
             }
             
             if (score > highScore) {
@@ -230,11 +268,17 @@ function animate() {
     if (gameOver) {
         document.getElementById('finalScore').textContent = score;
         gameOverScreen.classList.remove('d-none');
+        window.animationFrameId = null;
         return;
     }
 
-    requestAnimationFrame(animate);
+    window.animationFrameId = requestAnimationFrame(animate);
 }
 
 // Initialize high score
 highScoreElement.textContent = highScore;
+
+// Initialize the game display when page loads
+window.onload = function() {
+    initGame();
+};
