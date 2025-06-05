@@ -1,31 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Background Music
-    const bgMusic = new Audio('assets/super-mario-bros.mp3');
-    bgMusic.loop = true;
-    bgMusic.volume = 0.5; // Set volume to 50%
-    
-    // Try to play music automatically
-    const playPromise = bgMusic.play();
-    
-    // Handle autoplay restrictions
-    if (playPromise !== undefined) {
-        playPromise.catch(error => {
-            // Auto-play was prevented
-            // Show a UI element to let the user manually start playback
-            console.log('Autoplay prevented. Adding click event to start music.');
-            
-            // Add click event to the document to start music on first interaction
-            document.addEventListener('click', () => {
-                bgMusic.play();
-            }, { once: true });
-        });
-    }
-    
-    // Ensure music restarts if it somehow ends
-    bgMusic.addEventListener('ended', () => {
-        bgMusic.currentTime = 0;
-        bgMusic.play();
-    });
     // Theme Toggle Functionality
     const toggleSwitch = document.querySelector('#checkbox');
     const currentTheme = localStorage.getItem('theme');

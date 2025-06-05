@@ -734,7 +734,7 @@ body.dark-theme .cloud3 {
 /* About Hero Section Styles */
 .about-hero {
     padding: 80px 0;
-    background-color: rgba(240, 248, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
    
 }
 
@@ -752,11 +752,7 @@ body.dark-theme .about-hero {
     color: #f0f0f0;
 }
 
-/* Team Section Styles */
-/* .team {
-    padding: 50px 0;
-    background-color:rgba(240, 248, 255, 0.8);
-} */
+
 body.dark-theme  {
     color: #f0f0f0;
 }
@@ -860,6 +856,17 @@ body.dark-theme .team-social a:hover {
     padding: 80px 0;
 }
 
+/* Game Collection Section Styles */
+.game-collection {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 80px 0;
+}
+
+body.dark-theme .game-collection {
+    background-color: rgba(30, 30, 30, 0.8);
+    color: #f0f0f0;
+}
+
 body.dark-theme .gaming-values {
     background-color: rgba(30, 30, 30, 0.8);
     color: #f0f0f0;
@@ -897,4 +904,15 @@ body.dark-theme .value-item h4 {
 
 body.dark-theme .value-item p {
     color: #aaa;
+}
+
+/* Team Section Styles */
+.team {
+    background-color: rgba(240, 248, 255, 0.8);
+    padding: 80px 0;
+}
+
+body.dark-theme .team {
+    background-color: rgba(30, 30, 30, 0.8);
+    color: #f0f0f0;
 }

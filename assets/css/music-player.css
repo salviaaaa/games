@@ -1,0 +1,51 @@
+/* Music Player Container */
+.music-player-container {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #8cc73f;
+}
+
+.music-player-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.music-player-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+}
+
+.music-player-status {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-player-status i {
+    color: #333;
+    font-size: 16px;
+}
+
+body.dark-theme .music-player-container {
+    background-color: rgba(40, 40, 40, 0.9);
+    border-color: #5a8026;
+}
+
+body.dark-theme .music-player-status i {
+    color: #f0f0f0;
+}
