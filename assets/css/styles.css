@@ -353,7 +353,7 @@ body.dark-theme .cloud3 {
 .pipe {
     position: fixed;
     width: 80px;
-    bottom: 80px;
+    bottom: -450px;
     right: 150px;
 }
 
@@ -535,6 +535,7 @@ body.dark-theme .cloud3 {
     
     .pipe {
         width: 60px;
+        bottom: -300px;
     }
     
     .mushroom {
@@ -557,6 +558,7 @@ body.dark-theme .cloud3 {
     
     .pipe {
         width: 50px;
+        bottom: -200px;
     }
     
     .mushroom {
@@ -579,6 +581,7 @@ body.dark-theme .cloud3 {
     
     .pipe {
         width: 40px;
+        bottom: -150px;
     }
     
     .mushroom {

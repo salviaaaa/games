@@ -151,11 +151,8 @@ document.addEventListener('DOMContentLoaded', () => {
             mario.classList.add('jump');
             
             setTimeout(() => {
-                const footer = document.querySelector('.footer');
-                if (footer) {
-                    footer.style.transition = 'transform 0.8s cubic-bezier(0.86, 0, 0.07, 1)';
-                    footer.style.transform = 'translateY(-100%)';
-                }
+                // Hapus animasi footer agar tidak ikut melompat
+                // Hanya Mario yang berinteraksi/melompat
                 
                 if (pageContent) {
                     pageContent.classList.remove('visible');
